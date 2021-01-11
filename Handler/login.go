@@ -23,7 +23,7 @@ func Login(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return "登录操作失败"
 	}
-
-	log.Println(user.OpenID, user.NickName, ctrlUser)
+	ctrlUser.Insert(user)
+	// log.Println(user.OpenID, user.NickName, ctrlUser)
 	return "登录操作成功"
 }

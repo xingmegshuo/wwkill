@@ -36,7 +36,6 @@ func main() {
 		fmt.Println("What to send to the server? Type Q to quit.")
 		input, _ := inputReader.ReadString('\n')
 		trimmedInput := strings.Trim(input, "\n")
-
 		if trimmedInput == "Q" {
 			return
 		}

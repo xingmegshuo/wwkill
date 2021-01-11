@@ -11,7 +11,6 @@ package main
 import (
 	"log"
 	"net"
-	"time"
 	"wwKill/Handler"
 )
 
@@ -46,8 +45,8 @@ func ParseConn(conn net.Conn) {
 		log.Printf("用户发送了: %v\n", string(buf[:len]))
 		// 发送给解析函数
 		mes := Handler.ParseData(string(buf[:len]))
-		log.Println("等待三秒返回测试")
-		time.Sleep(time.Duration(3) * time.Second)
+		// log.Println("等待三秒返回测试")
+		// time.Sleep(time.Duration(3) * time.Second)
 		_, err = conn.Write([]byte(mes))
 		if err != nil {
 			log.Println("客户端丢失", err.Error())
