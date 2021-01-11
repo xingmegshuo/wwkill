@@ -39,6 +39,10 @@ func ParseData(con string) string {
 		log.Println("登录操作:")
 		mes := Login(info)
 		return mes
+	case "upgrade":
+		log.Println("账号升级")
+		mes := Upgrade(info)
+		return mes
 
 	default:
 		log.Println("无效key")
