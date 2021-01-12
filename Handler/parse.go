@@ -43,7 +43,10 @@ func ParseData(con string) string {
 		log.Println("账号升级")
 		mes := Upgrade(info)
 		return mes
-
+	case "back":
+		log.Println("获取背包")
+		mes := GetBack(info)
+		return mes
 	default:
 		log.Println("无效key")
 		mes := "没有对应数据处理!"

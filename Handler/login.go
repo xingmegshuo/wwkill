@@ -11,19 +11,95 @@ package Handler
 import (
 	"encoding/json"
 	"log"
+	"strconv"
+	"strings"
 	"wwKill/Mydb"
 )
 
+var ctrlUser = Mydb.NewUserCtrl()
+var ctrlBack = Mydb.NewBackCtrl()
+var ctrlBuddy = Mydb.NewBuddyCtrl()
+var ctrlRecord = Mydb.NewRecordCtrl()
+var user Mydb.User
+var backpack Mydb.Backpack
+var record Mydb.Record
+var buddy Mydb.Buddy
+
 // 用户登录函数处理
 func Login(mes []byte) string {
-	ctrlUser := Mydb.NewUserCtrl()
-	var user Mydb.User
+	// ctrlUser := Mydb.NewUserCtrl()
 	err := json.Unmarshal(mes, &user)
 	if err != nil {
 		log.Println("数据问题:", err.Error())
 		return "登录操作失败"
 	}
-	ctrlUser.Insert(user)
+	if len(user.OpenID) > 0 && len(user.NickName) > 0 && len(user.AvatarURL) > 0 {
+		// log.Println("hhhh")
+		thisUser := Mydb.User{
+			OpenID: user.OpenID,
+		}
+		U, has := ctrlUser.GetUser(thisUser)
+		// log.Println("aaaa")
+		if has {
+			mes := UserToString("ok", U, "登录成功")
+			// log.Println("bbbb")
+			return mes
+		} else {
+			user.Level = 1
+			user.Money = 300
+			// log.Println(user)
+			ctrlUser.Insert(user)
+			InitBack(user)
+			u, _ := ctrlUser.GetUser(user)
+			mes := UserToString("ok", u, "登录成功")
+			// log.Println("cccc")
+			return mes
+		}
+	} else {
+		return ToMes("error", "请检查发送的数据是否完整")
+	}
+
 	// log.Println(user.OpenID, user.NickName, ctrlUser)
-	return "登录操作成功"
+}
+
+// 转换内容
+func UserToString(status string, user Mydb.User, mes string) string {
+	str := "{'status':'" + status + "','mes':'" + mes + "','data':{'openID':'" + user.OpenID + "','nickName':'" + user.NickName + "','avatarUrl':'" + user.AvatarURL + "','level':'" + strconv.Itoa(user.Level) + "','money':'" + strconv.Itoa(user.Money) + "','orther':'" + user.Orther + "','id':'" + strconv.Itoa(int(user.Id)) + "'}}"
+	str = strings.Replace(str, "'", "\"", -1)
+	// log.Println(str)
+	return str
+}
+
+// 不携带数据
+func ToMes(status string, mes string) string {
+	str := "{'status':'" + status + "','mes':'" + mes + "'}"
+	str = strings.Replace(str, "'", "\"", -1)
+	return str
+}
+
+// 初始化个人仓库的内容
+func InitBack(user Mydb.User) {
+	user, has := ctrlUser.GetUser(user)
+	if has {
+
+		back := Mydb.Backpack{
+			Name:     "基础帽子",
+			Property: 0,
+			User:     int(user.Id),
+		}
+		back1 := Mydb.Backpack{
+			Name:     "基础下装",
+			Property: 0,
+			User:     int(user.Id),
+		}
+		back2 := Mydb.Backpack{
+			Name:     "基础下装",
+			Property: 0,
+			User:     int(user.Id),
+		}
+		ctrlBack.Insert(back1)
+		ctrlBack.Insert(back2)
+		ctrlBack.Insert(back)
+	}
+
 }

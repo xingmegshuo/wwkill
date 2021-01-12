@@ -32,4 +32,33 @@
 1.7 连胜数 - 最高连胜<br>
 1.8 逃跑<br>
 1.9 胜率<br>
-1.10 输赢<br>
+1.10 输赢<br>{"name":"login","values":"{\"nickName\":\"small\",\"openID\":\"12345\",\"avatarUrl\":\"https:\"}"}
+
+
+
+### websocket 监听数据格式,接收请求
+> socket 服务接收格式为json转成字符串形式,其中存在两个数据内容格式如下： {“name”:"请求地址，要实现的功能","values":{传输的必须数据，请求数据,json转字符串}}
+返回数据格式如下:{"status":"ok","mes":"提示信息",...."data":{ 其他json数据}} 为字符串格式
+
+1. login : 用户登录
+> 1.1 OpenId: 微信用户标识必须<br>
+1.2 NickName： 用户昵称必须<br>
+1.3 AvatarURL: 用户头像必须<br>
+1.4 Orther: 需要保存的其他信息,可选<br>
+示例: {"name":"login","values":"{\"nickName\":\"smal\",\"openID\":\"12345\",\"avatarUrl\":\"https:\"}"}<br>
+返回数据: {"status":"ok","mes":"登录成功","data":{"openID":"12345","nickName":"smal","avatarUrl":"https:","level":"1","money":"300","orther":"","id":"1"}}
+
+
+2. back : 获取背包
+> 1.1 OpenId : 微信用户标识必须<br>
+示例: {"name":"back","values":"{\"openID\":\"12345\"}"}<br>
+返回数据:  {"status":"ok","mes":"获取背包成功","data":[{"name":"基础下装","property":"0","stilTime":""},{"name":"基础下装","property":"0","stilTime":""},{"name":"基础帽子","property":"0","stilTime":""}]}
+
+3. upgrade : 升级和增加金币，或者用户修改昵称，头像
+> 1.1 OpenId : 微信用户标识必须<br>
+1.2 Money: 金币数量，用于购买减少，对战获取增加,非必须<br>
+1.3 nickName: 非必须<br>
+1.4 AvatarURL : 非必须<br>
+示例:{"name":"upgrade","values":"{\"openID\":\"12345\"}"}<br>
+返回数据:{"status":"ok","mes":"升级成功","data":{"openID":"12345","nickName":"smal","avatarUrl":"https:","level":"3","money":"300","orther":"","id":"1"}}
+
