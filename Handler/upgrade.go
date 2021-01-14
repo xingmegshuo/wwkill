@@ -11,6 +11,7 @@ package Handler
 import (
 	"encoding/json"
 	"log"
+	"wwKill/Mydb"
 )
 
 // 用户升级操作
@@ -22,11 +23,17 @@ func Upgrade(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "升级失败,数据无法解析")
 	}
-	thisUser, has := ctrlUser.GetUser(user)
+	User := Mydb.User{
+		OpenID: user.OpenID,
+	}
+
+	thisUser, has := ctrlUser.GetUser(User)
+	log.Println(thisUser)
 	if has {
-		thisUser.Level = thisUser.Level + 1
 		if user.Money != thisUser.Money && user.Money != 0 {
 			thisUser.Money = user.Money
+		} else {
+			thisUser.Level = thisUser.Level + 1
 		}
 		if len(user.NickName) > 0 {
 			thisUser.NickName = user.NickName

@@ -15,15 +15,12 @@ import (
 
 type Record struct {
 	Id       int64
-	user     int       `xorm:"foregin key(user) references user(userid)"`
-	gameTime time.Time `xorm:"text"`
-	identity int       `xorm:"integer"`
-	gameMode string    `xorm:"varchar(255)"`
-	count    int       `xorm:"integer"`
-	winCount int       `xorm:"integer"`
-	runAway  int       `xorm:"integer"`
-	winRate  int       `xorm:"integer"`
-	result   string    `xorm:"varchar(255)"`
+	User     int       `xorm:"User_id`
+	GameTime time.Time `xorm:"text"`
+	Identity int       `xorm:"integer"`
+	GameMode string    `xorm:"varchar(255)"`
+	RunAway  int       `xorm:"integer"`
+	Result   string    `xorm:"varchar(255)"`
 }
 
 // 获取全部战绩

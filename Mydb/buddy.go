@@ -15,8 +15,8 @@ type Buddy struct {
 	User int `xorm:"foregin key(user) references user(userid)"`
 	// Own_user int `xorm:"foregin key(user) references user(userid)"`
 	Agree  int    `xorm:"integer"`
-	buddys string `xorm:"text"`
-	del    int    `xorm:"integer"`
+	Buddys string `xorm:"text"`
+	Del    int    `xorm:"integer"`
 }
 
 // 获取全部好友

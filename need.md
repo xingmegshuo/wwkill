@@ -32,7 +32,7 @@
 1.7 连胜数 - 最高连胜<br>
 1.8 逃跑<br>
 1.9 胜率<br>
-1.10 输赢<br>{"name":"login","values":"{\"nickName\":\"small\",\"openID\":\"12345\",\"avatarUrl\":\"https:\"}"}
+1.10 输赢<br>
 
 
 
@@ -62,3 +62,26 @@
 示例:{"name":"upgrade","values":"{\"openID\":\"12345\"}"}<br>
 返回数据:{"status":"ok","mes":"升级成功","data":{"openID":"12345","nickName":"smal","avatarUrl":"https:","level":"3","money":"300","orther":"","id":"1"}}
 
+4. addback : 增加背包
+> 1.1 User: int格式 用户ID 必须<br>
+1.2 Name: 名字必须<br>
+1.3 property: int 属性必须<br>
+1.4 stilTime : 有效时间 可选<br>
+示例: {"name":"addback","values":"{\"User\":1,\"Name\":\"高级上衣\",\"property\":0}"}
+返回数据: {"status":"ok","mes":"添加背包成功"}
+
+5. record : 获取最近战绩
+> 1.1 OpenId : 微信用户标识必须<br>
+示例: {"name":"record","values":"{\"openID\":\"12345\"}"}<br>
+返回数据: {"status":"ok","mes":"获取战绩成功","data":[]}
+
+
+6. buddy : 获取好友列表
+> 1.1 OpenId : 微信用户标识必须<br>
+示例: {"name":"buddy","values":"{\"openID\":\"12345\"}"}<br>
+返回数据:{"status":"ok","mes":"获取好友列表成功","data":[]}
+
+7. recordRate: 获取胜率等
+> 1.1 OpenId : 微信用户标识必须<br>
+示例:{"name":"recordRate","values":"{\"openID\":\"12345\"}"}<br>
+返回数据:{"status":"ok","mes":"获取战绩成功","data":["count":"0","runAway":"0","maxWin":"0","winRate":"0"]}

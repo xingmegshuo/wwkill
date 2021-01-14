@@ -47,6 +47,22 @@ func ParseData(con string) string {
 		log.Println("获取背包")
 		mes := GetBack(info)
 		return mes
+	case "addback":
+		log.Println("购买商品，增加背包")
+		mes := AddBack(info)
+		return mes
+	case "record":
+		log.Println("获取最近战绩")
+		mes := GetRecord(info)
+		return mes
+	case "recordRate":
+		log.Println("获取全部战斗")
+		mes := GetRecordAll(info)
+		return mes
+	case "buddy":
+		log.Println("获取好友列表")
+		mes := GetBuddy(info)
+		return mes
 	default:
 		log.Println("无效key")
 		mes := "没有对应数据处理!"

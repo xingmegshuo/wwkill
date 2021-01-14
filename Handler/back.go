@@ -25,7 +25,6 @@ func AddBack(mes []byte) string {
 	}
 	ctrlBack.Insert(backpack)
 	return ToMes("ok", "添加背包成功")
-
 }
 
 // 用户背包
@@ -41,7 +40,6 @@ func GetBack(mes []byte) string {
 			User: int(thisUser.Id),
 		}
 		backs := ctrlBack.GetUser(back)
-		log.Println(backs)
 		return BackToString("ok", backs, "获取背包成功")
 	} else {
 		return ToMes("error", "获取背包失败，找不到用户")
