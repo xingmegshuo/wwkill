@@ -22,18 +22,32 @@ type Buddy struct {
 // 获取全部好友
 func (b Buddy) GetUser(a ...interface{}) []Buddy {
 	b, ok := a[0].(Buddy)
+	// log.Println(b)
 	buddys := make([]Buddy, 0)
 	if ok != false {
-		err := orm.Find(buddys, &b)
+		err := orm.Find(&buddys, b)
 		if err != nil {
 			log.Panic(err)
 		}
 	}
+	// log.Println(buddys)
 	return buddys
+}
+
+// 获取单个好友
+func (b Buddy) GetBuddy(a ...interface{}) (Buddy, bool) {
+	u, ok := a[0].(Buddy)
+	if ok != false {
+		has, _ := orm.Get(&u)
+		return u, has
+	} else {
+		return Buddy{}, false
+	}
 }
 
 // 插入单个好友
 func (b Buddy) Insert(a ...interface{}) bool {
+	// log.Println(a[0])
 	_, err := orm.InsertOne(a[0])
 	if err != nil {
 		log.Panic(err)
@@ -50,6 +64,5 @@ func (b Buddy) Update(a ...interface{}) bool {
 			log.Panic(err)
 		}
 	}
-
 	return true
 }

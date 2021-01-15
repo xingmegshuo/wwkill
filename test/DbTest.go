@@ -16,7 +16,7 @@ import (
 func main() {
 
 	// 背包管理器测试
-	ctrl := Mydb.NewBackCtrl()
+	ctrl := Mydb.NewBuddyCtrl()
 	// back := Mydb.Backpack{
 	// 	Name: "可爱裤子",
 	// 	User: 1,
@@ -27,10 +27,12 @@ func main() {
 	// 	StilTime: "2012-12-12 08：00：00",
 	// }
 	// ctrl.Update(back)
-	back := Mydb.Backpack{
-		User: 1,
+	buddy := Mydb.Buddy{
+		User:  1,
+		Agree: 1,
 	}
-	backs := ctrl.GetUser(back)
+	// ctrl.Insert(buddy)
+	backs := ctrl.GetUser(buddy)
 	fmt.Println(backs)
 
 	// 用户管理器测试

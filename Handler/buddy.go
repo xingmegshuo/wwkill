@@ -11,8 +11,10 @@ package Handler
 import (
 	"encoding/json"
 	"log"
+	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 	"wwKill/Mydb"
 )
 
@@ -23,14 +25,17 @@ func GetBuddy(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "获取好友失败,数据无法解析")
 	}
-	thisUser, has := ctrlUser.GetUser(user)
+	User := Mydb.User{
+		OpenID: user.OpenID,
+	}
+	thisUser, has := ctrlUser.GetUser(User)
 	if has {
-		back := Mydb.Buddy{
+		buddy := Mydb.Buddy{
 			User:  int(thisUser.Id),
 			Agree: 1,
 		}
-		backs := ctrlBack.GetUser(back)
-		return BackToString("ok", backs, "获取好友列表成功")
+		backs := ctrlBuddy.GetUser(buddy)
+		return BuddyToString("ok", backs, "获取好友列表成功")
 	} else {
 		return ToMes("error", "获取好友失败，找不到用户")
 	}
@@ -43,14 +48,18 @@ func GetNewBuddy(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "获取好友失败,数据无法解析")
 	}
-	thisUser, has := ctrlUser.GetUser(user)
+	User := Mydb.User{
+		OpenID: user.OpenID,
+	}
+	thisUser, has := ctrlUser.GetUser(User)
 	if has {
 		back := Mydb.Buddy{
-			User:  int(thisUser.Id),
-			Agree: 0,
+			Buddys: strconv.FormatInt(thisUser.Id, 10),
+			Agree:  0,
 		}
-		backs := ctrlBack.GetUser(back)
-		return BackToString("ok", backs, "获取好友申请成功")
+		// log.Println(back)
+		backs := ctrlBuddy.GetUser(back)
+		return BuddyToString("ok", backs, "获取好友申请成功")
 	} else {
 		return ToMes("error", "获取好友失败，找不到用户")
 	}
@@ -68,22 +77,85 @@ func AgreeBuddy(mes []byte) string {
 		Agree: 1,
 	}
 	ctrlBuddy.Update(Newbuddy)
+	B, has := Mydb.GetBuddy(NewBuddy)
+	if has {
+		Another := Mydb.Buddy{
+			User:   strconv.ParseInt(B.Buddys, 10, 64),
+			Buddys: strconv.FormatInt(B.User, 10),
+			Agree:  1,
+		}
+		ctrlBuddy.Insert(Another)
+	}
+
 	return ToMes("ok", "同意好友成功")
 }
 
+// 删除好友
+
 // 获取推荐好友
-// func RecomBuddy() string{
+func RecomBuddy(mes []byte) string {
+	err := json.Unmarshal(mes, &user)
+	if err != nil {
+		log.Println("数据问题:", err.Error())
+		return ToMes("error", "同意好友失败,数据无法解析")
+	}
+	SearchUser := Mydb.User{
+		Id: 0,
+	}
+	users := ctrlUser.GetUsers(SearchUser)
+	str := "{'status':'ok','mes':'获取推荐好友','data':["
+	rand.Seed(time.Now().Unix())
+	l := 0
+	if len(users) > 3 {
+		l = 3
+	} else {
+		l = len(users) - 1
+	}
+	for i := 0; i < l; i++ {
+		for {
+			j := rand.Intn(len(users))
+			if users[j].Id != user.Id {
+				if i == l-1 {
+					str = str + "{'openID':'" + user.OpenID + "','nickName':'" + user.NickName + "','avatarUrl':'" + user.AvatarURL + "','level':'" + strconv.Itoa(user.Level) + "','id':'" + strconv.Itoa(int(user.Id)) + "'}"
+				} else {
+					str = str + "{'openID':'" + user.OpenID + "','nickName':'" + user.NickName + "','avatarUrl':'" + user.AvatarURL + "','level':'" + strconv.Itoa(user.Level) + "','id':'" + strconv.Itoa(int(user.Id)) + "'},"
+				}
+				break
+			} else {
+				j = rand.Intn(len(users))
+				continue
+			}
+		}
+	}
+	str = str + "]}"
+	str = strings.Replace(str, "'", "\"", -1)
+	return str
+}
 
-// }
-
+// 添加好友
+func AddBuddy(mes []byte) string {
+	err := json.Unmarshal(mes, &buddy)
+	if err != nil {
+		log.Println("数据问题:", err.Error())
+		return ToMes("error", "发送好友申请失败,数据无法解析")
+	}
+	thisBuddy := Mydb.Buddy{
+		User:   int(buddy.User),
+		Buddys: buddy.Buddys,
+		Agree:  0,
+	}
+	ctrlBuddy.Insert(thisBuddy)
+	return ToMes("ok", "发送好友申请成功")
+}
 
 // buddy to str
 func BuddyToString(status string, back []Mydb.Buddy, mes string) string {
 	str := "{'status':'" + status + "','mes':'" + mes + "','data':["
 	for l, item := range back {
 		// to do : 解析好友列表
-		if len(item.Buddys) > 0 && item.Del == 0 && item.Agree == 1 {
+		if len(item.Buddys) > 0 && item.Del == 0 {
 			userId, _ := strconv.ParseInt(item.Buddys, 10, 64)
+			log.Println(userId)
 			user := Mydb.User{
 				Id: userId,
 			}

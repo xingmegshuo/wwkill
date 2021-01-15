@@ -23,7 +23,10 @@ func GetRecord(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "获取战绩失败,数据无法解析")
 	}
-	thisUser, has := ctrlUser.GetUser(user)
+	User := Mydb.User{
+		OpenID: user.OpenID,
+	}
+	thisUser, has := ctrlUser.GetUser(User)
 	if has {
 		back := Mydb.Record{
 			User: int(thisUser.Id),
@@ -42,7 +45,10 @@ func GetRecordAll(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "获取战绩失败,数据无法解析")
 	}
-	thisUser, has := ctrlUser.GetUser(user)
+	User := Mydb.User{
+		OpenID: user.OpenID,
+	}
+	thisUser, has := ctrlUser.GetUser(User)
 	if has {
 		back := Mydb.Record{
 			User: int(thisUser.Id),
@@ -73,7 +79,7 @@ func RecordToString(status string, records []Mydb.Record, mes string) string {
 
 // allRecord to str
 func AllRecordToString(status string, records []Mydb.Record, mes string) string {
-	str := "{'status':'" + status + "','mes':'" + mes + "','data':["
+	str := "{'status':'" + status + "','mes':'" + mes + "','data':{"
 	count := 0
 	winCount := 0
 	runAway := 0
@@ -98,9 +104,9 @@ func AllRecordToString(status string, records []Mydb.Record, mes string) string 
 		}
 	}
 	if winCount > 0 {
-		str = str + "'count':'" + strconv.Itoa(count) + "','runAway':'" + strconv.Itoa(runAway) + "','maxWin':'" + strconv.Itoa(maxWin) + "','winRate':'" + strconv.Itoa(winCount/count*100) + "']}"
+		str = str + "'count':'" + strconv.Itoa(count) + "','runAway':'" + strconv.Itoa(runAway) + "','maxWin':'" + strconv.Itoa(maxWin) + "','winRate':'" + strconv.Itoa(winCount/count*100) + "'}}"
 	} else {
-		str = str + "'count':'" + strconv.Itoa(count) + "','runAway':'" + strconv.Itoa(runAway) + "','maxWin':'" + strconv.Itoa(maxWin) + "','winRate':'" + strconv.Itoa(0) + "']}"
+		str = str + "'count':'" + strconv.Itoa(count) + "','runAway':'" + strconv.Itoa(runAway) + "','maxWin':'" + strconv.Itoa(maxWin) + "','winRate':'" + strconv.Itoa(0) + "'}}"
 	}
 	str = strings.Replace(str, "'", "\"", -1)
 	return str

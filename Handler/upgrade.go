@@ -26,9 +26,8 @@ func Upgrade(mes []byte) string {
 	User := Mydb.User{
 		OpenID: user.OpenID,
 	}
-
 	thisUser, has := ctrlUser.GetUser(User)
-	log.Println(thisUser)
+	// log.Println(thisUser)
 	if has {
 		if user.Money != thisUser.Money && user.Money != 0 {
 			thisUser.Money = user.Money

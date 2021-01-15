@@ -85,3 +85,18 @@
 > 1.1 OpenId : 微信用户标识必须<br>
 示例:{"name":"recordRate","values":"{\"openID\":\"12345\"}"}<br>
 返回数据:{"status":"ok","mes":"获取战绩成功","data":["count":"0","runAway":"0","maxWin":"0","winRate":"0"]}
+
+8. newbuddy : 获取好友申请
+> 1.1 OpenId : 微信用户标识必须<br>
+示例：{"name":"newbuddy","values":"{\"openID\":\"12345\"}"}<br>
+返回数据:{"status":"ok","mes":"获取好友申请成功","data":[]}
+
+9. agreebuddy: 同意好友申请
+> 1.1 buddy.Id int 必须
+
+10.rcombuddy: 获取好友推荐
+> 1.1 OpenId : 微信用户标识必须<br>
+示例:{"name":"rcombuddy","values":"{\"openID\":\"12345\"}"}<br>
+返回数据:{"status":"ok","mes":"获取推荐好友","data":[{"openID":"12345","nickName":"","avatarUrl":"","level":"0","id":"0"}]}
+
+11.addbuddy: 添加好友

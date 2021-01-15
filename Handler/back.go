@@ -34,7 +34,10 @@ func GetBack(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "获取背包失败,数据无法解析")
 	}
-	thisUser, has := ctrlUser.GetUser(user)
+	User := Mydb.User{
+		OpenID: user.OpenID,
+	}
+	thisUser, has := ctrlUser.GetUser(User)
 	if has {
 		back := Mydb.Backpack{
 			User: int(thisUser.Id),

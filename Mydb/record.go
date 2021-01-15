@@ -28,7 +28,7 @@ func (r Record) GetUser(a ...interface{}) []Record {
 	r, ok := a[0].(Record)
 	records := make([]Record, 0)
 	if ok != false {
-		err := orm.Find(records, &r)
+		err := orm.Find(&records, r)
 		if err != nil {
 			log.Panic(err)
 		}

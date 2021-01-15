@@ -9,7 +9,6 @@
 package Mydb
 
 import (
-	"fmt"
 	"log"
 )
 
@@ -28,11 +27,24 @@ func (u User) GetUser(a ...interface{}) (User, bool) {
 	u, ok := a[0].(User)
 	if ok != false {
 		has, _ := orm.Get(&u)
-		fmt.Println(u, has)
+		// fmt.Println(u, has)
 		return u, has
 	} else {
 		return User{}, false
 	}
+}
+
+// 返回多个用户
+func (u User) GetUsers(a ...interface{}) []User {
+	b, ok := a[0].(User)
+	users := make([]User, 0)
+	if ok != false {
+		err := orm.Find(&users, b)
+		if err != nil {
+			log.Panic(err)
+		}
+	}
+	return users
 }
 
 // 插入单个用户
