@@ -92,7 +92,9 @@
 返回数据:{"status":"ok","mes":"获取好友申请成功","data":[]}
 
 9. agreebuddy: 同意好友申请
-> 1.1 buddy.Id int 必须
+> 1.1 buddy.Id int 必须<br>
+示例:{"name":"agreebuddy","values":"{\"id\":2}"}<br>
+返回数据:{"status":"ok","mes":"同意好友成功"}
 
 10.rcombuddy: 获取好友推荐
 > 1.1 OpenId : 微信用户标识必须<br>
@@ -100,3 +102,12 @@
 返回数据:{"status":"ok","mes":"获取推荐好友","data":[{"openID":"12345","nickName":"","avatarUrl":"","level":"0","id":"0"}]}
 
 11.addbuddy: 添加好友
+> user int 用户ID<br>
+buddys string 好友用户ID<br>
+示例:{"name":"addbuddy","values":"{\"user\":1,\"buddys\":\"2\"}"}<br>
+返回数据：{"status":"ok","mes":"发送好友申请成功"}
+
+12.delbuddy: 删除好友双向删除
+> id int 好友id<br>
+示例:{"name":"delbuddy","values":"{\"id\":2}"}<br>
+返回数据:{"status":"ok","mes":"删除好友成功"}

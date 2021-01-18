@@ -33,6 +33,7 @@ func GetBuddy(mes []byte) string {
 		buddy := Mydb.Buddy{
 			User:  int(thisUser.Id),
 			Agree: 1,
+			Del:   0,
 		}
 		backs := ctrlBuddy.GetUser(buddy)
 		return BuddyToString("ok", backs, "获取好友列表成功")
@@ -56,12 +57,13 @@ func GetNewBuddy(mes []byte) string {
 		back := Mydb.Buddy{
 			Buddys: strconv.FormatInt(thisUser.Id, 10),
 			Agree:  0,
+			Del:    0,
 		}
 		// log.Println(back)
 		backs := ctrlBuddy.GetUser(back)
 		return BuddyToString("ok", backs, "获取好友申请成功")
 	} else {
-		return ToMes("error", "获取好友失败，找不到用户")
+		return ToMes("error", "获取好友申请失败，找不到用户")
 	}
 }
 
@@ -77,11 +79,12 @@ func AgreeBuddy(mes []byte) string {
 		Agree: 1,
 	}
 	ctrlBuddy.Update(Newbuddy)
-	B, has := Mydb.GetBuddy(NewBuddy)
+	B, has := ctrlBuddy.GetBuddy(Newbuddy)
 	if has {
+		userId, _ := strconv.ParseInt(B.Buddys, 10, 64)
 		Another := Mydb.Buddy{
-			User:   strconv.ParseInt(B.Buddys, 10, 64),
-			Buddys: strconv.FormatInt(B.User, 10),
+			User:   int(userId),
+			Buddys: strconv.Itoa(B.User),
 			Agree:  1,
 		}
 		ctrlBuddy.Insert(Another)
@@ -91,6 +94,34 @@ func AgreeBuddy(mes []byte) string {
 }
 
 // 删除好友
+func DeleteBuddy(mes []byte) string {
+	err := json.Unmarshal(mes, &buddy)
+	if err != nil {
+		log.Println("数据问题:", err.Error())
+		return ToMes("error", "删除好友失败,数据无法解析")
+	}
+	Newbuddy := Mydb.Buddy{
+		Id:  buddy.Id,
+		Del: 1,
+	}
+	ctrlBuddy.Update(Newbuddy)
+	B, has := ctrlBuddy.GetBuddy(buddy)
+	if has {
+		userId, _ := strconv.ParseInt(B.Buddys, 10, 64)
+		Another := Mydb.Buddy{
+			User:   int(userId),
+			Buddys: strconv.Itoa(B.User),
+		}
+		a, _ := ctrlBuddy.GetBuddy(Another)
+		this := Mydb.Buddy{
+			Id:  a.Id,
+			Del: 1,
+		}
+		ctrlBuddy.Update(this)
+	}
+	return ToMes("ok", "删除好友成功")
+
+}
 
 // 获取推荐好友
 func RecomBuddy(mes []byte) string {
@@ -99,6 +130,7 @@ func RecomBuddy(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "同意好友失败,数据无法解析")
 	}
+	U, _ := ctrlUser.GetUser(user)
 	SearchUser := Mydb.User{
 		Id: 0,
 	}
@@ -114,11 +146,11 @@ func RecomBuddy(mes []byte) string {
 	for i := 0; i < l; i++ {
 		for {
 			j := rand.Intn(len(users))
-			if users[j].Id != user.Id {
+			if users[j].Id != U.Id {
 				if i == l-1 {
-					str = str + "{'openID':'" + user.OpenID + "','nickName':'" + user.NickName + "','avatarUrl':'" + user.AvatarURL + "','level':'" + strconv.Itoa(user.Level) + "','id':'" + strconv.Itoa(int(user.Id)) + "'}"
+					str = str + "{'openID':'" + users[j].OpenID + "','nickName':'" + users[j].NickName + "','avatarUrl':'" + users[j].AvatarURL + "','level':'" + strconv.Itoa(users[j].Level) + "','id':'" + strconv.Itoa(int(users[j].Id)) + "'}"
 				} else {
-					str = str + "{'openID':'" + user.OpenID + "','nickName':'" + user.NickName + "','avatarUrl':'" + user.AvatarURL + "','level':'" + strconv.Itoa(user.Level) + "','id':'" + strconv.Itoa(int(user.Id)) + "'},"
+					str = str + "{'openID':'" + users[j].OpenID + "','nickName':'" + users[j].NickName + "','avatarUrl':'" + users[j].AvatarURL + "','level':'" + strconv.Itoa(users[j].Level) + "','id':'" + strconv.Itoa(int(users[j].Id)) + "'},"
 				}
 				break
 			} else {
@@ -155,7 +187,7 @@ func BuddyToString(status string, back []Mydb.Buddy, mes string) string {
 		// to do : 解析好友列表
 		if len(item.Buddys) > 0 && item.Del == 0 {
 			userId, _ := strconv.ParseInt(item.Buddys, 10, 64)
-			log.Println(userId)
+			// log.Println(userId)
 			user := Mydb.User{
 				Id: userId,
 			}

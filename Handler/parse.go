@@ -79,6 +79,10 @@ func ParseData(con string) string {
 		log.Println("添加好友申请")
 		mes := AddBuddy(info)
 		return mes
+	case "delbuddy":
+		log.Println("删除好友")
+		mes := DeleteBuddy(info)
+		return mes
 	default:
 		log.Println("无效key")
 		mes := "没有对应数据处理!"
