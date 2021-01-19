@@ -168,7 +168,7 @@ func RecomBuddy(mes []byte) string {
 		}
 	}
 	str = str + "]}"
-	str = strings.Replace(str, "'您已经向好友发送过申请", "\"", -1)
+	str = strings.Replace(str, "'", "\"", -1)
 	return str
 }
 

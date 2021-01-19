@@ -92,6 +92,8 @@ func ParseData(con string, ws *websocket.Conn) string {
 		log.Println("好友聊天")
 		mes := Chat(info)
 		return mes
+	// case "game":
+	// 	log.Println("开始游戏")
 
 	default:
 		log.Println("无效key")
