@@ -44,7 +44,7 @@ func GetBuddy(mes []byte) string {
 		// 	}
 		// 	client_buddy[ws] = user.NickName
 		// }
-		return BuddyToString("ok", backs, "获取好友列表成功")
+		return BuddyToString("ok", backs, "获取好友列表成功", 0)
 	} else {
 		return ToMes("error", "获取好友失败，找不到用户")
 	}
@@ -69,7 +69,7 @@ func GetNewBuddy(mes []byte) string {
 		}
 		// log.Println(back)
 		backs := ctrlBuddy.GetUser(back)
-		return BuddyToString("ok", backs, "获取好友申请成功")
+		return BuddyToString("ok", backs, "获取好友申请成功", 1)
 	} else {
 		return ToMes("error", "获取好友申请失败，找不到用户")
 	}
@@ -199,16 +199,26 @@ func AddBuddy(mes []byte) string {
 }
 
 // buddy to str
-func BuddyToString(status string, back []Mydb.Buddy, mes string) string {
+func BuddyToString(status string, back []Mydb.Buddy, mes string, statu int) string {
 	str := "{'status':'" + status + "','mes':'" + mes + "','data':["
 	for l, item := range back {
 		// to do : 解析好友列表
 		if len(item.Buddys) > 0 && item.Del == 0 {
-			userId, _ := strconv.ParseInt(item.Buddys, 10, 64)
-			// log.Println(userId)
-			user := Mydb.User{
-				Id: userId,
+
+			if statu == 0 {
+				userId, _ := strconv.ParseInt(item.Buddys, 10, 64)
+				// log.Println(userId)
+				user = Mydb.User{
+					Id: userId,
+				}
+			} else {
+				userId := int64(item.User)
+				// log.Println(userId)
+				user = Mydb.User{
+					Id: userId,
+				}
 			}
+
 			itemId := strconv.FormatInt(item.Id, 10)
 			User, _ := ctrlUser.GetUser(user)
 			if l == len(back)-1 {
