@@ -14,6 +14,8 @@ import (
 	"strconv"
 	"strings"
 	"wwKill/Mydb"
+
+	"golang.org/x/net/websocket"
 )
 
 var ctrlUser = Mydb.NewUserCtrl()
@@ -26,12 +28,12 @@ var record Mydb.Record
 var buddy Mydb.Buddy
 
 // 用户登录函数处理
-func Login(mes []byte) string {
+func Login(mes []byte, ws *websocket.Conn) string {
 	// ctrlUser := Mydb.NewUserCtrl()
 	err := json.Unmarshal(mes, &user)
 	if err != nil {
 		log.Println("数据问题:", err.Error())
-		return "登录操作失败"
+		return ToMes("error", "登录操作失败")
 	}
 	if len(user.OpenID) > 0 && len(user.NickName) > 0 && len(user.AvatarURL) > 0 {
 		// log.Println("hhhh")
@@ -43,6 +45,7 @@ func Login(mes []byte) string {
 		if has {
 			mes := UserToString("ok", U, "登录成功")
 			// log.Println("bbbb")
+			client_user[ws] = U.OpenID
 			return mes
 		} else {
 			user.Level = 1
@@ -51,6 +54,7 @@ func Login(mes []byte) string {
 			ctrlUser.Insert(user)
 			InitBack(user)
 			u, _ := ctrlUser.GetUser(user)
+			client_user[ws] = u.NickName
 			mes := UserToString("ok", u, "登录成功")
 			// log.Println("cccc")
 			return mes

@@ -36,6 +36,14 @@ func GetBuddy(mes []byte) string {
 			Del:   0,
 		}
 		backs := ctrlBuddy.GetUser(buddy)
+		// for _, item := range backs {
+		// 	userId, _ := strconv.ParseInt(item.Buddys, 10, 64)
+		// 	// log.Println(userId)
+		// 	user := Mydb.User{
+		// 		Id: userId,
+		// 	}
+		// 	client_buddy[ws] = user.NickName
+		// }
 		return BuddyToString("ok", backs, "获取好友列表成功")
 	} else {
 		return ToMes("error", "获取好友失败，找不到用户")
@@ -160,7 +168,7 @@ func RecomBuddy(mes []byte) string {
 		}
 	}
 	str = str + "]}"
-	str = strings.Replace(str, "'", "\"", -1)
+	str = strings.Replace(str, "'您已经向好友发送过申请", "\"", -1)
 	return str
 }
 
@@ -176,8 +184,18 @@ func AddBuddy(mes []byte) string {
 		Buddys: buddy.Buddys,
 		Agree:  0,
 	}
-	ctrlBuddy.Insert(thisBuddy)
-	return ToMes("ok", "发送好友申请成功")
+	B, has := ctrlBuddy.GetBuddy(buddy)
+	if has {
+		if B.Agree == 0 {
+			return ToMes("error", "您已经向该用户发送过好友申请")
+		} else {
+			return ToMes("error", "该好友已经是您的好友")
+		}
+	} else {
+		ctrlBuddy.Insert(thisBuddy)
+		return ToMes("ok", "发送好友申请成功")
+	}
+
 }
 
 // buddy to str

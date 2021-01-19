@@ -111,3 +111,11 @@ buddys string 好友用户ID<br>
 > id int 好友id<br>
 示例:{"name":"delbuddy","values":"{\"id\":2}"}<br>
 返回数据:{"status":"ok","mes":"删除好友成功"}
+
+13.chat : 好友聊天
+> openId : 聊天的好友<br>
+mes : 发送的内容<br>
+示例:{"name":"chat","values":"{\"openID\":\"1345\",\"message\":\"早上好啊\"}"}
+<br>
+返回信息:{"status":"ok","mes":"发送成功"}
+

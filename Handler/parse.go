@@ -11,6 +11,8 @@ package Handler
 import (
 	"encoding/json"
 	"log"
+
+	"golang.org/x/net/websocket"
 )
 
 // 数据格式
@@ -19,8 +21,12 @@ type Data struct {
 	Values string
 }
 
+var client_user = make(map[*websocket.Conn]string)
+
+// var client_buddy = make(map[*websocket.Conn]string)
+
 // 解析key
-func ParseData(con string) string {
+func ParseData(con string, ws *websocket.Conn) string {
 	log.Println("开始解析", con)
 	var data Data
 	oldData := []byte(con)
@@ -31,13 +37,12 @@ func ParseData(con string) string {
 	}
 	log.Printf("类型%T", data.Values)
 	info := []byte(data.Values)
-	log.Println(info)
+	// log.Println(info)
 	// log.Println(data.Values, data)
-
 	switch data.Name {
 	case "login":
 		log.Println("登录操作:")
-		mes := Login(info)
+		mes := Login(info, ws)
 		return mes
 	case "upgrade":
 		log.Println("账号升级")
@@ -83,9 +88,19 @@ func ParseData(con string) string {
 		log.Println("删除好友")
 		mes := DeleteBuddy(info)
 		return mes
+	case "chat":
+		log.Println("好友聊天")
+		mes := Chat(info)
+		return mes
+
 	default:
 		log.Println("无效key")
 		mes := "没有对应数据处理!"
 		return mes
 	}
+}
+
+// 关闭连接时退出用户
+func CloseUser(ws *websocket.Conn) {
+	delete(client_user, ws)
 }
