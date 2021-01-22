@@ -11,14 +11,16 @@ package Handler
 import (
 	"encoding/json"
 	"log"
+	"strings"
 	"wwKill/Mydb"
-
+	
 	"golang.org/x/net/websocket"
 )
 
 type ChatStruct struct {
 	OpenId  string
 	Message string
+	User    string
 }
 
 var chat ChatStruct
@@ -49,6 +51,7 @@ func Chat(info []byte) string {
 	if ws == nil {
 		return ToMes("error", "用户不在线")
 	} else {
+		mes := MesToStr(mes, U.OpenID)
 		err = websocket.Message.Send(ws, mes)
 		if err != nil {
 			return ToMes("error", "发送失败")
@@ -56,4 +59,11 @@ func Chat(info []byte) string {
 			return ToMes("ok", "发送成功")
 		}
 	}
+}
+
+// MesToStr
+func MesToStr(mes string, u string) string {
+	str := "{'user':'" + u + "','mes':'" + mes + "'}"
+	str = strings.Replace(str, "'", "\"", -1)
+	return str
 }

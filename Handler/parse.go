@@ -22,18 +22,20 @@ type Data struct {
 }
 
 var client_user = make(map[*websocket.Conn]string)
+var client_palyer = make(map[*websocket.Conn]string)
 
 // var client_buddy = make(map[*websocket.Conn]string)
 
 // 解析key
-func ParseData(con string, ws *websocket.Conn) string {
+func ParseData(con string, ws *websocket.Conn) {
 	log.Println("开始解析", con)
 	var data Data
 	oldData := []byte(con)
 	err := json.Unmarshal(oldData, &data)
 	if err != nil {
 		log.Println(err)
-		return "解析数据失败,请查看数据格式"
+		Send(ws, "解析数据失败,请查看数据格式")
+
 	}
 	log.Printf("类型%T", data.Values)
 	info := []byte(data.Values)
@@ -43,66 +45,74 @@ func ParseData(con string, ws *websocket.Conn) string {
 	case "login":
 		log.Println("登录操作:")
 		mes := Login(info, ws)
-		return mes
+		Send(ws, mes)
 	case "upgrade":
 		log.Println("账号升级")
 		mes := Upgrade(info)
-		return mes
+		Send(ws, mes)
 	case "back":
 		log.Println("获取背包")
 		mes := GetBack(info)
-		return mes
+		Send(ws, mes)
 	case "addback":
 		log.Println("购买商品，增加背包")
 		mes := AddBack(info)
-		return mes
+		Send(ws, mes)
 	case "record":
 		log.Println("获取最近战绩")
 		mes := GetRecord(info)
-		return mes
+		Send(ws, mes)
 	case "recordRate":
 		log.Println("获取全部战斗")
 		mes := GetRecordAll(info)
-		return mes
+		Send(ws, mes)
 	case "buddy":
 		log.Println("获取好友列表")
 		mes := GetBuddy(info)
-		return mes
+		Send(ws, mes)
 	case "newbuddy":
 		log.Println("获取好友申请")
 		mes := GetNewBuddy(info)
-		return mes
+		Send(ws, mes)
 	case "agreebuddy":
 		log.Println("同意好友申请")
 		mes := AgreeBuddy(info)
-		return mes
+		Send(ws, mes)
 	case "rcombuddy":
 		log.Println("获取好友推荐")
 		mes := RecomBuddy(info)
-		return mes
+		Send(ws, mes)
 	case "addbuddy":
 		log.Println("添加好友申请")
 		mes := AddBuddy(info)
-		return mes
+		Send(ws, mes)
 	case "delbuddy":
 		log.Println("删除好友")
 		mes := DeleteBuddy(info)
-		return mes
+		Send(ws, mes)
 	case "chat":
 		log.Println("好友聊天")
 		mes := Chat(info)
-		return mes
-	// case "game":
-	// 	log.Println("开始游戏")
-
+		Send(ws, mes)
+	case "game":
+		log.Println("开始游戏")
+		mes := GameStart(info, ws)
+		Send(ws, mes)
 	default:
-		log.Println("无效key")
-		mes := "没有对应数据处理!"
-		return mes
+		log.Println("游戏中")
+		go RoomSocket([]byte(con))
 	}
 }
 
 // 关闭连接时退出用户
 func CloseUser(ws *websocket.Conn) {
 	delete(client_user, ws)
+}
+
+// 数据返回
+func Send(ws *websocket.Conn, mes string) {
+	if err := websocket.Message.Send(ws, mes); err != nil {
+		log.Println("客户端丢失", err.Error())
+		CloseUser(ws)
+	}
 }

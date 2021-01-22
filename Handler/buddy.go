@@ -36,14 +36,6 @@ func GetBuddy(mes []byte) string {
 			Del:   0,
 		}
 		backs := ctrlBuddy.GetUser(buddy)
-		// for _, item := range backs {
-		// 	userId, _ := strconv.ParseInt(item.Buddys, 10, 64)
-		// 	// log.Println(userId)
-		// 	user := Mydb.User{
-		// 		Id: userId,
-		// 	}
-		// 	client_buddy[ws] = user.NickName
-		// }
 		return BuddyToString("ok", backs, "获取好友列表成功", 0)
 	} else {
 		return ToMes("error", "获取好友失败，找不到用户")
