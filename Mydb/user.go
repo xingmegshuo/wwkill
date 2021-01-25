@@ -13,7 +13,7 @@ import (
 )
 
 type User struct {
-	Id        int64
+	Id        int
 	OpenID    string `xorm:"varchar(255)"`
 	NickName  string `xorm:"varchar(255)"`
 	AvatarURL string `xorm:"varchar(255)"`

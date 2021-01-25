@@ -55,7 +55,7 @@ func GetNewBuddy(mes []byte) string {
 	thisUser, has := ctrlUser.GetUser(User)
 	if has {
 		back := Mydb.Buddy{
-			Buddys: strconv.FormatInt(thisUser.Id, 10),
+			Buddys: strconv.Itoa(thisUser.Id),
 			Agree:  0,
 			Del:    0,
 		}
@@ -198,20 +198,20 @@ func BuddyToString(status string, back []Mydb.Buddy, mes string, statu int) stri
 		if len(item.Buddys) > 0 && item.Del == 0 {
 
 			if statu == 0 {
-				userId, _ := strconv.ParseInt(item.Buddys, 10, 64)
+				userId, _ := strconv.Atoi(item.Buddys)
 				// log.Println(userId)
 				user = Mydb.User{
 					Id: userId,
 				}
 			} else {
-				userId := int64(item.User)
+				userId := item.User
 				// log.Println(userId)
 				user = Mydb.User{
 					Id: userId,
 				}
 			}
 
-			itemId := strconv.FormatInt(item.Id, 10)
+			itemId := strconv.Itoa(item.Id)
 			User, _ := ctrlUser.GetUser(user)
 			if l == len(back)-1 {
 				str = str + "{'openID':'" + User.OpenID + "','nickName':'" + User.NickName + "','avatarUrl':'" + User.AvatarURL + "','level':'" + strconv.Itoa(User.Level) + "','Id':'" + itemId + "'}"

@@ -14,10 +14,10 @@ import (
 )
 
 type Record struct {
-	Id       int64
+	Id       int
 	User     int       `xorm:"User_id`
 	GameTime time.Time `xorm:"text"`
-	Identity int       `xorm:"integer"`
+	Identity string    `xorm:"integer"`
 	GameMode string    `xorm:"varchar(255)"`
 	RunAway  int       `xorm:"integer"`
 	Result   string    `xorm:"varchar(255)"`

@@ -13,6 +13,7 @@ import (
 	"log"
 	"strconv"
 	"time"
+	"wwKill/Mydb"
 
 	"golang.org/x/net/websocket"
 )
@@ -72,12 +73,62 @@ func GameStart(mes []byte, ws *websocket.Conn) string {
 	return ToMes("ok", message)
 }
 
-// // 保持游戏中的连接,游戏中的通信
-// func GameSocket(ws *websocket.Conn, room Room) {
-// 	for {
+// 结束游戏
+func GameOver(room Room, over int) {
+	for _, item := range room.User {
+		thisUser := Mydb.User{
+			OpenID: item.OpenID,
+		}
+		U, _ := ctrlUser.GetUser(thisUser)
+		if over == 1 {
+			if item.Identity == "狼人" {
+				record := Mydb.Record{
+					User:     U.Id,
+					GameTime: time.Now(),
+					Identity: item.Identity,
+					GameMode: room.GameMode,
+					RunAway:  0,
+					Result:   "胜利",
+				}
+				ctrlRecord.Insert(record)
+			} else {
+				record := Mydb.Record{
+					User:     U.Id,
+					GameTime: time.Now(),
+					Identity: item.Identity,
+					GameMode: room.GameMode,
+					RunAway:  0,
+					Result:   "失败",
+				}
+				ctrlRecord.Insert(record)
 
-// 	}
-// }
+			}
+		} else {
+			if item.Identity == "狼人" {
+				record := Mydb.Record{
+					User:     U.Id,
+					GameTime: time.Now(),
+					Identity: item.Identity,
+					GameMode: room.GameMode,
+					RunAway:  0,
+					Result:   "失败",
+				}
+				ctrlRecord.Insert(record)
+			} else {
+				record := Mydb.Record{
+					User:     U.Id,
+					GameTime: time.Now(),
+					Identity: item.Identity,
+					GameMode: room.GameMode,
+					RunAway:  0,
+					Result:   "胜利",
+				}
+				ctrlRecord.Insert(record)
+
+			}
+		}
+	}
+}
 
 // 查找房间
 func SearchRoom(GameType string) Room {
@@ -169,7 +220,13 @@ func GameSocket(room Room, ch chan string) {
 	for {
 		over := Over(ro)
 		if over == 1 {
-			ServerSend(ro, "游戏结束,----胜利")
+			ServerSend(ro, "游戏结束,狼人胜利")
+			GameOver(ro, over)
+			break
+		}
+		if over == 2 {
+			ServerSend(ro, "游戏结束,平民胜利")
+			GameOver(ro, over)
 			break
 		}
 		ServerSend(ro, "法官:第"+strconv.Itoa(a)+"天")
@@ -186,17 +243,6 @@ func Join(room Room, player Player) Room {
 	ServerSend(room, "用户"+player.OpenID+"进入房间")
 	return room
 }
-
-// 离开房间
-// func Leave(room Room, player Player) {	err := json.Unmarshal(info, &chat)
-
-// 	for l, item := range room.User {
-// 		if item.OpenID == player.OpenID {
-// 			room.User = append(room.User[:l], room.User[l+1:])
-// 			break
-// 		}
-// 	}
-// }
 
 // 房间连接
 func RoomSocket(conn []byte) {
@@ -245,6 +291,10 @@ func RoomSocket(conn []byte) {
 					// 大家投票
 					HuKill(mes.User, room, mes.Message[2:], ch)
 				}
+				if mes.Message[:2] == "离开" {
+					// 退出房间
+					room = Leave(mes.User, room)
+				}
 				ready := Ready(room)
 				if ready == 1 {
 					ServerSend(room, "法官:所有人已准备，游戏5秒后开始!")
@@ -254,7 +304,22 @@ func RoomSocket(conn []byte) {
 			}
 		}
 	}
+}
 
+// 退出房间
+func Leave(user string, room Room) Room {
+	a := 0
+	for l, item := range room.User {
+		if item.OpenID == user {
+			a = l
+			// openId 赋值给游戏中用户
+			client_user[item.Ws] = client_palyer[item.Ws]
+			// 把用户从在线用户移除
+			delete(client_palyer, item.Ws)
+		}
+	}
+	room.User = room.User[:a+copy(room.User[a:], room.User[a+1:])]
+	return room
 }
 
 // 等待死亡
@@ -512,12 +577,8 @@ func Iden(room Room, user string, iden string) Room {
 func Over(room Room) int {
 	a := 0
 	b := 0
+	c := 0
 	for _, item := range room.User {
-		if item.Identity == "狼人" && item.Survive == 0 {
-		}
-		if item.Identity == "平民" && item.Survive == 0 {
-			b = b + 1
-		}
 		if item.Survive == 0 {
 			if item.Identity == "狼人" {
 				a = a + 1
@@ -525,14 +586,37 @@ func Over(room Room) int {
 			if item.Identity == "平民" {
 				b = b + 1
 			}
+			if item.Identity == "女巫" || item.Identity == "猎人" || item.Identity == "预言家" {
+				c = c + 1
+			}
 
 		}
 	}
-	if a == room.Ww || b == room.Ci {
-		return 1
-	} else {
-		return 0
+	switch room.GameMode {
+	case "新手场":
+		if a == room.Ww {
+			return 1
+		}
+		if b == room.Ci || c == room.God+room.Hu+room.Wi {
+			return 2
+		}
+	case "普通场":
+		if a == room.Ww {
+			return 1
+		}
+		if b == room.Ci || c == room.God+room.Hu+room.Wi {
+			return 2
+		}
+	case "高手场":
+		if a == room.Ww {
+			return 1
+		}
+		if c == room.God+room.Hu+room.Wi {
+			return 2
+		}
 	}
+
+	return 0
 }
 
 // 天黑阶段
