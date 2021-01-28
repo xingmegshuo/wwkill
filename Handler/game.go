@@ -239,13 +239,13 @@ func GameSocket(room Room, ch chan string) {
 // 加入房间
 func Join(room Room, player Player) Room {
 	room.User = append(room.User, player)
-	ServerSend(room,player.OpenID+":用户"+player.OpenID+"进入房间")
+	ServerSend(room, player.OpenID+":用户"+player.OpenID+"进入房间")
 	str := ""
-	for l, item := range room.User{
-		if l == len(room.User)-1{
-			str = str+""+item.OpenID+":"+strconv.Itoa(item.Ready)+""
-		}else{
-			str = str+""+item.OpenID+":"+strconv.Itoa(item.Ready)+","
+	for l, item := range room.User {
+		if l == len(room.User)-1 {
+			str = str + "" + item.OpenID + ":" + strconv.Itoa(item.Ready) + ""
+		} else {
+			str = str + "" + item.OpenID + ":" + strconv.Itoa(item.Ready) + ","
 		}
 	}
 	str = str + ":房间总人数"
@@ -258,10 +258,10 @@ func RoomSocket(conn []byte) {
 	var value Mes
 	err := json.Unmarshal(conn, &value)
 	if err != nil {
-		log.Println("连接断开",err)
+		log.Println("连接断开", err)
 		// todo 退出
 	} else {
-		for _, room := range PlayRoom {
+		for l, room := range PlayRoom {
 			ch := make(chan string)
 			if room.Owner == value.Room {
 				if value.Message[:6] == "准备" {
@@ -311,6 +311,7 @@ func RoomSocket(conn []byte) {
 					ServerSend(room, "游戏开始！请选择身份")
 				}
 			}
+			PlayRoom[l] = room
 		}
 	}
 }
@@ -325,14 +326,14 @@ func Leave(user string, room Room) Room {
 			delete(client_palyer, item.Ws)
 		}
 	}
-	ServerSend(room,user+":用户"+user+"退出房间")
-	room.User = append(room.User[:a],room.User[a+1:]...)
+	ServerSend(room, user+":用户"+user+"退出房间")
+	room.User = append(room.User[:a], room.User[a+1:]...)
 	// 删除房间
-	for l,ro := range PlayRoom{
-		if ro.Owner == room.Owner{
-			if len(room.User) == 0{
+	for l, ro := range PlayRoom {
+		if ro.Owner == room.Owner {
+			if len(room.User) == 0 {
 				delete(PlayRoom, l)
-			}else{
+			} else {
 				PlayRoom[l] = room
 			}
 		}
@@ -466,16 +467,16 @@ func Init(ws *websocket.Conn, room Room) string {
 		room = Join(room, player)
 	}
 	real := 0
-	for l, ro := range PlayRoom{
-		if ro.Owner == room.Owner{
-			real,_ = strconv.Atoi(l)
-		}else{
+	for l, ro := range PlayRoom {
+		if ro.Owner == room.Owner {
+			real, _ = strconv.Atoi(l)
+		} else {
 			real = 0
 		}
 	}
-	if real !=0{
+	if real != 0 {
 		PlayRoom[strconv.Itoa(real)] = room
-	}else{
+	} else {
 		PlayRoom[strconv.Itoa(len(PlayRoom)+1)] = room
 	}
 	return room.Owner
@@ -540,8 +541,13 @@ func Ready(room Room) int {
 func Re(room Room, user string) Room {
 	for _, item := range room.User {
 		if item.OpenID == user {
-			item.Ready = 1
-			ServerSend(room, item.OpenID+":用户"+item.OpenID+"已经准备")
+			if item.Ready == 0 {
+				item.Ready = 1
+				ServerSend(room, item.OpenID+":用户"+item.OpenID+"已经准备")
+			} else {
+				item.Ready = 0
+				ServerSend(room, item.OpenID+":用户"+item.OpenID+"取消准备")
+			}
 			break
 		}
 	}
