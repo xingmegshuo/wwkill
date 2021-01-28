@@ -55,7 +55,7 @@ func GetNewBuddy(mes []byte) string {
 	thisUser, has := ctrlUser.GetUser(User)
 	if has {
 		back := Mydb.Buddy{
-			Buddys: strconv.Itoa(thisUser.Id),
+			Buddys:  strconv.FormatInt(thisUser.Id, 10),
 			Agree:  0,
 			Del:    0,
 		}
@@ -74,16 +74,14 @@ func AgreeBuddy(mes []byte) string {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "同意好友失败,数据无法解析")
 	}
-	Newbuddy := Mydb.Buddy{
-		Id:    buddy.Id,
-		Agree: 1,
-	}
-	ctrlBuddy.Update(Newbuddy)
-	B, has := ctrlBuddy.GetBuddy(Newbuddy)
+	B,_ := ctrlBuddy.GetBuddy(buddy)
+	B.Agree = 1
+	ctrlBuddy.Update(B)
+	B, has := ctrlBuddy.GetBuddy(B)
 	if has {
-		userId, _ := strconv.ParseInt(B.Buddys, 10, 64)
+		UserId,_ :=  strconv.Atoi(B.Buddys)
 		Another := Mydb.Buddy{
-			User:   int(userId),
+			User:  UserId,
 			Buddys: strconv.Itoa(B.User),
 			Agree:  1,
 		}
@@ -198,20 +196,20 @@ func BuddyToString(status string, back []Mydb.Buddy, mes string, statu int) stri
 		if len(item.Buddys) > 0 && item.Del == 0 {
 
 			if statu == 0 {
-				userId, _ := strconv.Atoi(item.Buddys)
+				UserId, _ := strconv.ParseInt(item.Buddys, 10, 64)
 				// log.Println(userId)
 				user = Mydb.User{
-					Id: userId,
+					Id: UserId,
 				}
 			} else {
 				userId := item.User
 				// log.Println(userId)
 				user = Mydb.User{
-					Id: userId,
+					Id: int64(userId),
 				}
 			}
 
-			itemId := strconv.Itoa(item.Id)
+			itemId := strconv.FormatInt(item.Id, 10)
 			User, _ := ctrlUser.GetUser(user)
 			if l == len(back)-1 {
 				str = str + "{'openID':'" + User.OpenID + "','nickName':'" + User.NickName + "','avatarUrl':'" + User.AvatarURL + "','level':'" + strconv.Itoa(User.Level) + "','Id':'" + itemId + "'}"

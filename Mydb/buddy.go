@@ -11,7 +11,7 @@ package Mydb
 import "log"
 
 type Buddy struct {
-	Id   int
+	Id   int64
 	User int `xorm:"foregin key(user) references user(userid)"`
 	// Own_user int `xorm:"foregin key(user) references user(userid)"`
 	Agree  int    `xorm:"integer"`

@@ -35,7 +35,7 @@ func SetEngin(db string) *xorm.Engine {
 	// 同步数据表
 	this_err := orm.Sync2(new(Buddy), new(Record), new(User), new(Backpack))
 	if this_err != nil {
-		log.Panic("Fail to sync database: %v\n", this_err)
+		log.Panic("Fail to sync database:", this_err)
 	}
 	orm.TZLocation = time.Local
 	return orm

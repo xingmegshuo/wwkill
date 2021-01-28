@@ -62,15 +62,12 @@ func Login(mes []byte, ws *websocket.Conn) string {
 	} else {
 		return ToMes("error", "请检查发送的数据是否完整")
 	}
-
-	// log.Println(user.OpenID, user.NickName, ctrlUser)
 }
 
 // 转换内容
 func UserToString(status string, user Mydb.User, mes string) string {
 	str := "{'status':'" + status + "','mes':'" + mes + "','data':{'openID':'" + user.OpenID + "','nickName':'" + user.NickName + "','avatarUrl':'" + user.AvatarURL + "','level':'" + strconv.Itoa(user.Level) + "','money':'" + strconv.Itoa(user.Money) + "','orther':'" + user.Orther + "','id':'" + strconv.Itoa(int(user.Id)) + "'}}"
 	str = strings.Replace(str, "'", "\"", -1)
-	// log.Println(str)
 	return str
 }
 
@@ -106,4 +103,20 @@ func InitBack(user Mydb.User) {
 		ctrlBack.Insert(back)
 	}
 
+}
+
+
+// 返回用户
+func GetUserMes(mes[]byte) string{
+	err := json.Unmarshal(mes, &user)
+	if err != nil {
+		log.Println("数据问题:", err.Error())
+		return ToMes("error", "获取信息失败")
+	}
+	thisUser := Mydb.User{
+		OpenID: user.OpenID,
+	}
+	U,_ := ctrlUser.GetUser(thisUser)
+	str := UserToString("ok", U, "获取成功")
+	return str
 }

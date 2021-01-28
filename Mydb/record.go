@@ -14,7 +14,7 @@ import (
 )
 
 type Record struct {
-	Id       int
+	Id       int64
 	User     int       `xorm:"User_id`
 	GameTime time.Time `xorm:"text"`
 	Identity string    `xorm:"integer"`

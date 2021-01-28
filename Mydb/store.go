@@ -13,7 +13,7 @@ import (
 )
 
 type Backpack struct {
-	Id       int
+	Id       int64
 	Name     string `xorm:"varchar(255)"`
 	Property int    `xorm:"integer"`
 	Num      int    `xorm:"integer"`

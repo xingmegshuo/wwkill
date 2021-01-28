@@ -28,19 +28,16 @@ var client_palyer = make(map[*websocket.Conn]string)
 
 // 解析key
 func ParseData(con string, ws *websocket.Conn) {
-	log.Println("开始解析", con)
+	// log.Println("开始解析", con)
 	var data Data
 	oldData := []byte(con)
 	err := json.Unmarshal(oldData, &data)
 	if err != nil {
 		log.Println(err)
 		Send(ws, "解析数据失败,请查看数据格式")
-
 	}
-	log.Printf("类型%T", data.Values)
+	// log.Printf("类型%T", data.Values)
 	info := []byte(data.Values)
-	// log.Println(info)
-	// log.Println(data.Values, data)
 	switch data.Name {
 	case "login":
 		log.Println("登录操作:")
@@ -94,13 +91,17 @@ func ParseData(con string, ws *websocket.Conn) {
 		log.Println("好友聊天")
 		mes := Chat(info)
 		Send(ws, mes)
+	case "getUser":
+		log.Println("获取游戏中信息")
+		mes := GetUserMes(info)
+		Send(ws, mes)
 	case "game":
 		log.Println("开始游戏")
 		mes := GameStart(info, ws)
 		Send(ws, mes)
 	default:
 		log.Println("游戏中")
-		go RoomSocket([]byte(con))
+		go RoomSocket(oldData)
 	}
 }
 
