@@ -39,22 +39,28 @@ func Login(mes []byte, ws *websocket.Conn) string {
 		// log.Println("hhhh")
 		thisUser := Mydb.User{
 			OpenID: user.OpenID,
-		}
+		} 
 		U, has := ctrlUser.GetUser(thisUser)
 		// log.Println("aaaa")
 		if has {
 			mes := UserToString("ok", U, "登录成功")
 			// log.Println("bbbb")
+			for k,v := range client_user{
+				if v == U.OpenID{
+					delete(client_user,k)
+				}
+			}
 			client_user[ws] = U.OpenID
 			return mes
 		} else {
 			user.Level = 1
 			user.Money = 300
+			user.Id = 0
 			// log.Println(user)
 			ctrlUser.Insert(user)
 			InitBack(user)
 			u, _ := ctrlUser.GetUser(user)
-			client_user[ws] = u.NickName
+			client_user[ws] = u.OpenID
 			mes := UserToString("ok", u, "登录成功")
 			// log.Println("cccc")
 			return mes
