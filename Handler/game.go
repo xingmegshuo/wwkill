@@ -197,51 +197,7 @@ func NewRoom(GameType string) Room {
 
 }
 
-// 游戏逻辑
-func GameSocket(room Room, ch chan string) {
-	a := 1
-	var ro Room
-	ro = room
-	wait := ""
-	ServerSend(ro, "法官:start Game!!!!")
-	for {
-		// str,ok := <-ch 
-		// log.Println(ok,"-------")
-		// select str[:4] {
-		// case "died":
-		// 	// to do 用户死亡
-		// 	ro = Die(room, str[4:])
-		// case "save":
-		// 	// 救活用户
-		// 	ro = Save(room, str[4:])
-		// case "diew":
-		// 	wait = WaitSave(room, str[4:])
-		// }
-		select{
-		case str := <-ch:
-			log.Println(str)
-		default:
-			over := Over(ro)
-			if over == 1 {
-				ServerSend(ro, "游戏结束,狼人胜利")
-				GameOver(ro, over)
-				break
-			}
-			if over == 2 {
-				ServerSend(ro, "游戏结束,平民胜利")
-				GameOver(ro, over)
-				break
-			}
-			ServerSend(ro, "法官:第"+strconv.Itoa(a)+"天")
-			time.Sleep(time.Second * 2)
-			Black(room, strconv.Itoa(a), wait)
-			ServerSend(ro, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
-			Day(room)
-			a = a + 1
-		}
-		
-	}
-}
+
 
 // 加入房间
 func Join(room Room, player Player) Room {
@@ -273,12 +229,12 @@ func Join(room Room, player Player) Room {
 func RoomSocket(conn []byte) {
 	var value Mes
 	err := json.Unmarshal(conn, &value)
+	a := 1
 	if err != nil {
 		log.Println("连接断开", err)
 		// todo 退出
 	} else {
 		for l, room := range PlayRoom {
-			ch := make(chan string)
 			if room.Owner == value.Room {
 				if value.Message[:6] == "准备" {
 					room = Re(room, value.User)
@@ -294,38 +250,75 @@ func RoomSocket(conn []byte) {
 					room = Iden(room, value.User, value.Message[6:])
 					PlayRoom[l] = room
 				}
-				if value.Message[:6] == "查看" {
-					// ServerSend(room, mes.User+"查看"+mes.Message[2:])
-					// 预言家查看身份
-					LookIden(value.User, room, value.Message[6:])
-				}
-				if value.Message[:6] == "毒药" {
-					go WiKill(value.User, room, value.Message[6:], ch)
-				}
-				if value.Message[:6] == "解药" {
-					// 女巫救人
-					go WiSave(value.User, room, value.Message[6:], ch)
-				}
-				if value.Message[:6] == "暗杀" {
-					// 狼人杀人
-					go WwKill(value.User, room, value.Message[6:], ch)
-				}
-				if value.Message[:6] == "杀人" {
-					// 猎人杀人
-					go HuKill(value.User, room, value.Message[6:], ch)
-				}
-				if value.Message[:6] == "投票" {
-					// 大家投票
-					go HuKill(value.User, room, value.Message[6:], ch)
-				}
+
 				if value.Message[:6] == "离开" {
 					// 退出房间
 					room = Leave(value.User, room)
 				}
 				start := Start(room)
 				if  start== 0{
-					go GameSocket(room, ch)
+					socket := 0
+					if value.Message[:6] == "查验" {
+						// ServerSend(room, mes.User+"查看"+mes.Message[2:])
+						// 预言家查看身份
+						LookIden(value.User, room, value.Message[6:])
+						socket =1
+					}
+					if value.Message[:6] == "毒药" {
+						WiKill(value.User, room, value.Message[6:])
+						socket =1
+
+					}
+					if value.Message[:6] == "解药" {
+						// 女巫救人
+						WiSave(value.User, room, value.Message[6:])
+						socket =1
+
+					}
+					if value.Message[:6] == "暗杀" {
+						// 狼人杀人
+						log.Println(value.Message)
+						WwKill(value.User, room, value.Message[6:])
+						socket =1
+
+					}
+					if value.Message[:6] == "杀人" {
+						// 猎人杀人
+						HuKill(value.User, room, value.Message[6:])
+						socket =1
+
+					}
+					if value.Message[:6] == "投票" {
+						// 大家投票
+						HuKill(value.User, room, value.Message[6:])
+						socket =1
+
+					}
+					if socket == 0{
+						if a==1{
+							ServerSend(room, "法官:start Game!!!!")
+						}
+						wait := ""		
+						ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
+						time.Sleep(time.Second * 2)
+						Black(room, strconv.Itoa(a), wait)
+						ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
+						Day(room)
+						a = a+1
+					}
 				}
+				over := Over(room)
+				if over == 1 {
+					ServerSend(room, "游戏结束,狼人胜利")
+					GameOver(room, over)
+					break
+				}
+				if over == 2 {
+					ServerSend(room, "游戏结束,平民胜利")
+					GameOver(room, over)
+					break
+				}
+		
 			}
 		}
 	}
@@ -391,50 +384,56 @@ func Save(room Room, user string) Room {
 }
 
 // 猎人杀人
-func HuKill(user string, room Room, look string, ch chan string) {
+func HuKill(user string, room Room, look string) {
 	for _, item := range room.User {
-		if item.OpenID == look {
-			ch <- "died" + item.OpenID
-		}
 		if item.OpenID == user {
 			Send(item.Ws, "您开枪带走了"+look)
 		}
 	}
+	room = Die(room,look)
 }
 
 // 狼人杀人
-func WwKill(user string, room Room, look string, ch chan string) {
+func WwKill(user string, room Room, look string) {
+	log.Println(user,look)
 	score := 0
 	kill := ""
+	b := 0
+	log.Println(room.User)
 	for _, item := range room.User {
 		if item.OpenID == look {
+			log.Println("h")
 			item.Score = item.Score + 1
 		}
 		if item.OpenID == user {
+			log.Println("hh")
 			Send(item.Ws, "您投票给"+look)
 		}
 		if item.Score > score {
+			log.Println("hhh")
 			score = item.Score
 			kill = item.OpenID
 		}
+		if item.Identity == "女巫" && item.Survive !=0{
+			b = 1
+		}
 	}
-	if room.Wi > 0 {
-		ch <- "diew" + kill
-	} else {
-		ch <- "died" + kill
+	if b == 0{
+		room = Die(room, kill)
+	}else{
+		mes := WaitSave(room,kill)
+		log.Println(mes)
 	}
 }
 
 // 女巫救人
-func WiSave(user string, room Room, look string, ch chan string) {
+func WiSave(user string, room Room, look string) {
 	for _, item := range room.User {
-		if item.OpenID == look {
-			ch <- "save" + item.OpenID
-		}
 		if item.OpenID == user {
 			Send(item.Ws, "您用解药救了"+look)
 		}
 	}
+	room = Save(room, look)
 }
 
 // 预言家查看身份
@@ -452,15 +451,13 @@ func LookIden(user string, room Room, look string) {
 }
 
 // 女巫毒人
-func WiKill(user string, room Room, look string, ch chan string) {
+func WiKill(user string, room Room, look string) {
 	for _, item := range room.User {
-		if item.OpenID == look {
-			ch <- "died" + item.OpenID
-		}
 		if item.OpenID == user {
 			Send(item.Ws, "您用毒药毒死了"+look)
 		}
 	}
+	room = Die(room,look)
 }
 
 // 初始化改变用户状态,由在线换为游戏中
@@ -724,13 +721,13 @@ func Black(room Room, day string, wait string) {
 		}
 
 	}
-
 }
 
 // 白天阶段
 func Day(room Room) {
 	ServerSend(room, "法官:天亮了")
 	for _, item := range room.User {
+		log.Println(item.Survive)
 		if item.Survive == 3 {
 			item.Survive = 0
 			if item.Identity == "猎人" {
@@ -748,6 +745,7 @@ func Day(room Room) {
 		}
 	}
 	ServerSend(room, "法官:请用户投票")
+	log.Println("*********----------")
 	time.Sleep(time.Second * 15)
 	for _, item := range room.User {
 		if item.Survive == 3 {
@@ -765,4 +763,5 @@ func Day(room Room) {
 			item.Survive = 0
 		}
 	}
+	log.Println("********************")
 }
