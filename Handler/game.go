@@ -392,7 +392,6 @@ func HuKill(user string, room Room, look string, ch chan string) {
 
 // 管道信息
 func Read(ch chan string, room Room) {
-	log.Println(room, "-----")
 	mes, _ := <-ch
 	log.Println(mes, "--------------")
 	switch mes[:4] {
