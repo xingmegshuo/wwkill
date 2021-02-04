@@ -392,19 +392,18 @@ func HuKill(user string, room Room, look string, ch chan string) {
 
 // 管道信息
 func Read(ch chan string, room Room) {
-	for {
-		log.Println(room, "-----")
-		mes, _ := <-ch
-		log.Println(mes, "--------------")
-		switch mes[:4] {
-		case "dead":
-			Die(room, mes[4:])
-		case "save":
-			Save(room, mes[4:])
-		case "deaw":
-			WaitSave(room, mes[4:])
-		}
+	log.Println(room, "-----")
+	mes, _ := <-ch
+	log.Println(mes, "--------------")
+	switch mes[:4] {
+	case "dead":
+		Die(room, mes[4:])
+	case "save":
+		Save(room, mes[4:])
+	case "deaw":
+		WaitSave(room, mes[4:])
 	}
+
 }
 
 // 狼人杀人
