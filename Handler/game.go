@@ -294,11 +294,11 @@ func Gaming(room Room, ch chan string, sock int) {
 	start := Start(room)
 	if start == 0 {
 		for {
+			go Read(ch, room)
 			if sock == 1 {
 				if a == 1 {
 					ServerSend(room, "法官:start Game!!!!")
 				}
-				go Read(ch, room)
 				wait := ""
 				ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
 				time.Sleep(time.Second * 2)
