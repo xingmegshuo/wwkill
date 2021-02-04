@@ -448,13 +448,13 @@ func WiSave(user string, room Room, look string, ch chan string) {
 // 预言家查看身份
 func LookIden(user string, room Room, look string) {
 	iden := ""
-	log.Println(user, look)
 	for _, item := range room.User {
 		if item.OpenID == look {
 			iden = item.Identity
-			log.Println(iden)
+			continue
 		}
 		if item.OpenID == user && iden != "" {
+			log.Println("---------", iden)
 			Send(item.Ws, "您查看了"+look+"它的身份是"+iden)
 		}
 	}
