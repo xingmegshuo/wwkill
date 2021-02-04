@@ -291,31 +291,33 @@ func RoomSocket(conn []byte) {
 // 游戏中
 func Gaming(room Room, ch chan string, sock int) {
 	a := 1
-	for {
-		start := Start(room)
-		if start == 0 && sock == 1 {
-			if a == 1 {
-				ServerSend(room, "法官:start Game!!!!")
+	start := Start(room)
+	if start == 0 {
+		for {
+			if sock == 1 {
+				if a == 1 {
+					ServerSend(room, "法官:start Game!!!!")
+				}
+				go Read(ch, room)
+				wait := ""
+				ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
+				time.Sleep(time.Second * 2)
+				Black(room, strconv.Itoa(a), wait)
+				ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
+				Day(room)
+				a = a + 1
 			}
-			go Read(ch, room)
-			wait := ""
-			ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
-			time.Sleep(time.Second * 2)
-			Black(room, strconv.Itoa(a), wait)
-			ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
-			Day(room)
-			a = a + 1
-		}
-		over := Over(room)
-		if over == 1 {
-			ServerSend(room, "游戏结束,狼人胜利")
-			GameOver(room, over)
-			break
-		}
-		if over == 2 {
-			ServerSend(room, "游戏结束,平民胜利")
-			GameOver(room, over)
-			break
+			over := Over(room)
+			if over == 1 {
+				ServerSend(room, "游戏结束,狼人胜利")
+				GameOver(room, over)
+				break
+			}
+			if over == 2 {
+				ServerSend(room, "游戏结束,平民胜利")
+				GameOver(room, over)
+				break
+			}
 		}
 	}
 }
