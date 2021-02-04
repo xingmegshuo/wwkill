@@ -234,6 +234,7 @@ func RoomSocket(conn []byte) {
 		for l, room := range PlayRoom {
 			if room.Owner == value.Room {
 				ch := make(chan string)
+				sock := 1
 				if value.Message[:6] == "准备" {
 					room = Re(room, value.User)
 					ready := Ready(room)
@@ -255,38 +256,44 @@ func RoomSocket(conn []byte) {
 				if value.Message[:6] == "查验" {
 					// 预言家查看身份
 					LookIden(value.User, room, value.Message[6:])
+					sock = 0
 				}
 				if value.Message[:6] == "毒药" {
 					go WiKill(value.User, room, value.Message[6:], ch)
+					sock = 0
 				}
 				if value.Message[:6] == "解药" {
 					// 女巫救人
 					go WiSave(value.User, room, value.Message[6:], ch)
+					sock = 0
 				}
 				if value.Message[:6] == "暗杀" {
 					// 狼人杀人
 					go WwKill(value.User, room, value.Message[6:], ch)
+					sock = 0
 				}
 				if value.Message[:6] == "杀人" {
 					// 猎人杀人
 					go HuKill(value.User, room, value.Message[6:], ch)
+					sock = 0
 				}
 				if value.Message[:6] == "投票" {
 					// 大家投票
 					go WwKill(value.User, room, value.Message[6:], ch)
+					sock = 0
 				}
-				go Gaming(room, ch)
+				go Gaming(room, ch, sock)
 			}
 		}
 	}
 }
 
 // 游戏中
-func Gaming(room Room, ch chan string) {
+func Gaming(room Room, ch chan string, sock int) {
 	a := 1
 	for {
 		start := Start(room)
-		if start == 0 {
+		if start == 0 && sock == 1 {
 			if a == 1 {
 				ServerSend(room, "法官:start Game!!!!")
 			}
