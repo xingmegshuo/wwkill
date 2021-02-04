@@ -374,6 +374,7 @@ func Die(room Room, user string) {
 		}
 	}
 	PlayRoom[l] = room
+	log.Println(room, "---------1")
 }
 
 // 救活用户
@@ -740,7 +741,8 @@ func Black(room Room, day string, wait string) {
 // 白天阶段
 func Day(room Room) {
 	ServerSend(room, "法官:天亮了")
-	log.Println(room.User, "**********")
+	log.Println(room.User, "**********2")
+	log.Println(PlayRoom, "-------3")
 	for _, item := range room.User {
 		if item.Survive == 3 {
 			item.Survive = 0
