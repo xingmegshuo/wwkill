@@ -392,36 +392,34 @@ func HuKill(user string, room Room, look string, ch chan string) {
 
 // 管道信息
 func Read(ch chan string, room Room) {
-	mes, _ := <-ch
-	log.Println(mes, "--------------")
-	switch mes[:4] {
-	case "dead":
-		Die(room, mes[4:])
-	case "save":
-		Save(room, mes[4:])
-	case "deaw":
-		WaitSave(room, mes[4:])
+	for {
+		log.Println(room, "-----")
+		mes, _ := <-ch
+		log.Println(mes, "--------------")
+		switch mes[:4] {
+		case "dead":
+			Die(room, mes[4:])
+		case "save":
+			Save(room, mes[4:])
+		case "deaw":
+			WaitSave(room, mes[4:])
+		}
 	}
 }
 
 // 狼人杀人
 func WwKill(user string, room Room, look string, ch chan string) {
-	log.Println(user, look)
 	score := 0
 	kill := ""
 	b := 0
-	log.Println(room.User)
 	for _, item := range room.User {
 		if item.OpenID == look {
-			log.Println("h")
 			item.Score = item.Score + 1
 		}
 		if item.OpenID == user {
-			log.Println("hh")
 			Send(item.Ws, "您投票给"+look)
 		}
 		if item.Score > score {
-			log.Println("hhh")
 			score = item.Score
 			kill = item.OpenID
 		}
@@ -738,7 +736,6 @@ func Black(room Room, day string, wait string) {
 func Day(room Room) {
 	ServerSend(room, "法官:天亮了")
 	for _, item := range room.User {
-		log.Println(item.Survive)
 		if item.Survive == 3 {
 			item.Survive = 0
 			if item.Identity == "猎人" {
