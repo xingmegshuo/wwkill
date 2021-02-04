@@ -367,6 +367,13 @@ func Die(room Room, user string) {
 			break
 		}
 	}
+	l := ""
+	for i, ro := range PlayRoom {
+		if ro.Owner == room.Owner {
+			l = i
+		}
+	}
+	PlayRoom[l] = room
 }
 
 // 救活用户
