@@ -227,7 +227,6 @@ func Join(room Room, player Player) Room {
 func RoomSocket(conn []byte) {
 	var value Mes
 	err := json.Unmarshal(conn, &value)
-	a := 1
 	if err != nil {
 		log.Println("连接断开", err)
 		// todo 退出
@@ -254,7 +253,6 @@ func RoomSocket(conn []byte) {
 					room = Leave(value.User, room)
 				}
 				if value.Message[:6] == "查验" {
-					// ServerSend(room, mes.User+"查看"+mes.Message[2:])
 					// 预言家查看身份
 					LookIden(value.User, room, value.Message[6:])
 				}
@@ -267,7 +265,6 @@ func RoomSocket(conn []byte) {
 				}
 				if value.Message[:6] == "暗杀" {
 					// 狼人杀人
-					log.Println(value.Message)
 					go WwKill(value.User, room, value.Message[6:], ch)
 				}
 				if value.Message[:6] == "杀人" {
@@ -278,33 +275,40 @@ func RoomSocket(conn []byte) {
 					// 大家投票
 					go WwKill(value.User, room, value.Message[6:], ch)
 				}
-				start := Start(room)
-				if start == 0 {
-					if a == 1 {
-						ServerSend(room, "法官:start Game!!!!")
-					}
-					go Read(ch, room)
-					wait := ""
-					ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
-					time.Sleep(time.Second * 2)
-					Black(room, strconv.Itoa(a), wait)
-					ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
-					Day(room)
-					a = a + 1
-				}
-				over := Over(room)
-				if over == 1 {
-					ServerSend(room, "游戏结束,狼人胜利")
-					GameOver(room, over)
-					break
-				}
-				if over == 2 {
-					ServerSend(room, "游戏结束,平民胜利")
-					GameOver(room, over)
-					break
-				}
-
+				go Gaming(room, ch)
 			}
+		}
+	}
+}
+
+// 游戏中
+func Gaming(room Room, ch chan string) {
+	a := 1
+	for {
+		start := Start(room)
+		if start == 0 {
+			if a == 1 {
+				ServerSend(room, "法官:start Game!!!!")
+			}
+			go Read(ch, room)
+			wait := ""
+			ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
+			time.Sleep(time.Second * 2)
+			Black(room, strconv.Itoa(a), wait)
+			ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
+			Day(room)
+			a = a + 1
+		}
+		over := Over(room)
+		if over == 1 {
+			ServerSend(room, "游戏结束,狼人胜利")
+			GameOver(room, over)
+			break
+		}
+		if over == 2 {
+			ServerSend(room, "游戏结束,平民胜利")
+			GameOver(room, over)
+			break
 		}
 	}
 }
@@ -438,7 +442,6 @@ func LookIden(user string, room Room, look string) {
 	for _, item := range room.User {
 		if item.OpenID == look {
 			iden = item.Identity
-			continue
 		}
 		if item.OpenID == user && iden != "" {
 			Send(item.Ws, "您查看了"+look+"它的身份是"+iden)
