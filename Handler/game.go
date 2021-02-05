@@ -403,7 +403,8 @@ func Read(ch chan string, room Room) {
 	mes, _ := <-ch
 	log.Println(mes, "--------------")
 	switch mes[:4] {
-	case "dead":
+	case "died":
+		log.Println("用户死亡")
 		Die(room, mes[4:])
 	case "save":
 		Save(room, mes[4:])
