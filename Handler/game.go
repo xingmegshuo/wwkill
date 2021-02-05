@@ -742,6 +742,7 @@ func Day(room Room) {
 	ServerSend(room, "法官:天亮了")
 	for l, item := range room.User {
 		if item.Survive == 3 {
+			ServerSend(room, "法官:死亡用户"+item.OpenID+"死亡,请他发言")
 			item.Survive = 0
 			if item.Identity == "猎人" {
 				ServerSend(room, "法官:用户"+item.OpenID+"死亡,他的身份是猎人请他发动技能")
