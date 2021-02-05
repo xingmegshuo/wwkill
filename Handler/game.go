@@ -361,9 +361,10 @@ func WaitSave(room Room, user string) string {
 
 // 用户死亡
 func Die(room Room, user string) {
-	for _, item := range room.User {
+	for l, item := range room.User {
 		if item.OpenID == user {
 			item.Survive = 3
+			room.User[l] = item
 			break
 		}
 	}
@@ -404,7 +405,6 @@ func Read(ch chan string, room Room) {
 	log.Println(mes, "--------------")
 	switch mes[:4] {
 	case "died":
-		log.Println("用户死亡")
 		Die(room, mes[4:])
 	case "save":
 		Save(room, mes[4:])
