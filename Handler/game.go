@@ -309,12 +309,12 @@ func Gaming(room Room, ch chan string, sock int) {
 			}
 			over := Over(room)
 			if over == 1 {
-				ServerSend(room, "游戏结束,狼人胜利")
+				ServerSend(room, "游戏结束,平民胜利")
 				GameOver(room, over)
 				break
 			}
 			if over == 2 {
-				ServerSend(room, "游戏结束,平民胜利")
+				ServerSend(room, "游戏结束,狼人胜利")
 				GameOver(room, over)
 				break
 			}
