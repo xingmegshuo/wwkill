@@ -743,6 +743,7 @@ func Day(room Room) {
 	for l, item := range room.User {
 		if item.Survive == 3 {
 			ServerSend(room, "法官:死亡用户,"+item.OpenID)
+			time.Sleep(time.Second * 5)
 			item.Survive = 0
 			if item.Identity == "猎人" {
 				ServerSend(room, "法官:用户"+item.OpenID+"死亡,他的身份是猎人请他发动技能")
@@ -765,8 +766,10 @@ func Day(room Room) {
 	}
 	ServerSend(room, "法官:请用户投票")
 	time.Sleep(time.Second * 15)
-	for _, item := range room.User {
+	for l, item := range room.User {
 		if item.Survive == 3 {
+			ServerSend(room, "法官:死亡用户,"+item.OpenID)
+			time.Sleep(time.Second * 5)
 			item.Survive = 0
 			if item.Identity == "猎人" {
 				ServerSend(room, "法官:用户"+item.OpenID+"死亡,他的身份是猎人请他发动技能")
@@ -774,6 +777,7 @@ func Day(room Room) {
 			}
 			ServerSend(room, "法官:用户"+item.OpenID+"死亡,请他发言")
 			time.Sleep(time.Second * 30)
+			room.User[l] = item
 		}
 	}
 }
