@@ -361,10 +361,9 @@ func WaitSave(room Room, user string) string {
 
 // 用户死亡
 func Die(room Room, user string) {
-	for l, item := range room.User {
+	for _, item := range room.User {
 		if item.OpenID == user {
 			item.Survive = 3
-			room.User[l] = item
 			break
 		}
 	}
@@ -742,9 +741,9 @@ func Black(room Room, day string, wait string) {
 // 白天阶段
 func Day(room Room) {
 	ServerSend(room, "法官:天亮了")
-	log.Println(room.User, "**********2")
 	log.Println(PlayRoom, "-------3")
 	for _, item := range room.User {
+		log.Println(item.Survive)
 		if item.Survive == 3 {
 			item.Survive = 0
 			if item.Identity == "猎人" {
