@@ -743,8 +743,7 @@ func Black(room Room, day string, wait string) {
 func Day(room Room) {
 	ServerSend(room, "法官:天亮了")
 	log.Println(PlayRoom, "-------3")
-	for _, item := range room.User {
-		log.Println(item.Survive, "存活")
+	for l, item := range room.User {
 		if item.Survive == 3 {
 			item.Survive = 0
 			if item.Identity == "猎人" {
@@ -754,7 +753,10 @@ func Day(room Room) {
 				ServerSend(room, "法官:用户"+item.OpenID+"死亡,请他发言")
 				time.Sleep(time.Second * 30)
 			}
+			room.User[l] = item
 		}
+	}
+	for _, item := range room.User {
 		if item.Survive == 1 {
 			item.Survive = 0
 			ServerSend(room, "法官:请用户"+item.OpenID+"发言")
