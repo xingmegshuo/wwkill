@@ -293,8 +293,8 @@ func Gaming(room Room, ch chan string, sock int) {
 	a := 1
 	start := Start(room)
 	if start == 0 {
+		go Read(ch, room)
 		for {
-			go Read(ch, room)
 			if sock == 1 {
 				if a == 1 {
 					ServerSend(room, "法官:start Game!!!!")
@@ -375,7 +375,6 @@ func Die(room Room, user string) {
 		}
 	}
 	PlayRoom[l] = room
-	log.Println(room, "---------1")
 }
 
 // 救活用户
@@ -402,7 +401,6 @@ func HuKill(user string, room Room, look string, ch chan string) {
 // 管道信息
 func Read(ch chan string, room Room) {
 	mes, _ := <-ch
-	log.Println(mes, "--------------")
 	switch mes[:4] {
 	case "died":
 		Die(room, mes[4:])
@@ -411,7 +409,6 @@ func Read(ch chan string, room Room) {
 	case "deaw":
 		WaitSave(room, mes[4:])
 	}
-
 }
 
 // 狼人杀人
@@ -727,7 +724,7 @@ func Black(room Room, day string, wait string) {
 			time.Sleep(time.Second * 20)
 			continue
 		} else {
-			if item.Survive != 0 && item.Identity == "预言家" {
+			if item.Survive != 0 && item.Identity == "女巫" {
 				ServerWi(room, "请女巫选择是否用药")
 				time.Sleep(time.Second * 20)
 				if wait != "" {
@@ -742,7 +739,6 @@ func Black(room Room, day string, wait string) {
 // 白天阶段
 func Day(room Room) {
 	ServerSend(room, "法官:天亮了")
-	log.Println(PlayRoom, "-------3")
 	for l, item := range room.User {
 		if item.Survive == 3 {
 			item.Survive = 0
@@ -764,7 +760,6 @@ func Day(room Room) {
 		}
 	}
 	ServerSend(room, "法官:请用户投票")
-	log.Println("*********----------")
 	time.Sleep(time.Second * 15)
 	for _, item := range room.User {
 		if item.Survive == 3 {
@@ -776,11 +771,5 @@ func Day(room Room) {
 			ServerSend(room, "法官:用户"+item.OpenID+"死亡,请他发言")
 			time.Sleep(time.Second * 30)
 		}
-		if item.Survive == 2 {
-			ServerSend(room, "法官:请用户"+item.OpenID+"发言")
-			time.Sleep(time.Second * 30)
-			item.Survive = 0
-		}
 	}
-	log.Println("********************")
 }
