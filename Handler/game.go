@@ -318,6 +318,7 @@ func Gaming(room Room, ch chan string, sock int) {
 				GameOver(room, over)
 				break
 			}
+
 		}
 	}
 }
