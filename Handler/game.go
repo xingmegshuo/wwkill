@@ -749,12 +749,17 @@ func Day(room Room) {
 			item.Survive = 0
 			if item.Identity == "猎人" {
 				ServerSend(room, "法官:用户"+item.OpenID+"死亡,他的身份是猎人请他发动技能")
-				time.Sleep(time.Second * 10)
+				// time.Sleep(time.Second * 10)
+				time.Sleep(time.Second * 2)
+
 				ServerSend(room, "法官:用户"+item.OpenID+",请发言")
-				time.Sleep(time.Second * 30)
+				// time.Sleep(time.Second * 30)
+				time.Sleep(time.Second * 2)
+
 			} else {
 				ServerSend(room, "法官:用户"+item.OpenID+"死亡,请他发言")
-				time.Sleep(time.Second * 30)
+				// time.Sleep(time.Second * 30)
+				time.Sleep(time.Second * 2)
 			}
 			room.User[l] = item
 		}
@@ -763,7 +768,9 @@ func Day(room Room) {
 		if item.Survive == 1 {
 			item.Survive = 0
 			ServerSend(room, "法官:请用户"+item.OpenID+"发言")
-			time.Sleep(time.Second * 30)
+			// time.Sleep(time.Second * 30)
+			time.Sleep(time.Second * 2)
+
 		}
 	}
 	log.Println("hhhhhhhhh")
