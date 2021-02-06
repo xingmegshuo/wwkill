@@ -437,7 +437,7 @@ func WwKill(user string, room Room, look string, ch chan string) {
 		}
 		room.User[l] = item
 	}
-	log.Println(kill, "------------杀人", "c")
+	log.Println(kill, "------------杀人", c)
 	if b == 0 {
 		ch <- "died" + kill
 	} else {
