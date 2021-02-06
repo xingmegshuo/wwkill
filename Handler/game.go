@@ -417,15 +417,18 @@ func WwKill(user string, room Room, look string, ch chan string) {
 	score := 0
 	kill := ""
 	b := 0
+	c := 0
 	for l, item := range room.User {
 		if item.OpenID == look {
 			item.Score = item.Score + 1
+		}
+		if item.Survive != 0 {
+			c = c + 1
 		}
 		if item.OpenID == user {
 			Send(item.Ws, "您投票给"+look)
 		}
 		if item.Score > score {
-			log.Println(item.Score, "票数")
 			score = item.Score
 			kill = item.OpenID
 		}
@@ -434,7 +437,7 @@ func WwKill(user string, room Room, look string, ch chan string) {
 		}
 		room.User[l] = item
 	}
-	log.Println(kill, "------------杀人")
+	log.Println(kill, "------------杀人", "c")
 	if b == 0 {
 		ch <- "died" + kill
 	} else {
