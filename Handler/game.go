@@ -768,6 +768,11 @@ func Day(room Room) {
 			room.User[l] = item
 		}
 	}
+	for l, item := range PlayRoom {
+		if item.Owner == room.Owner {
+			PlayRoom[l] = room
+		}
+	}
 	for _, item := range room.User {
 		if item.Survive == 1 {
 			item.Survive = 0
@@ -790,6 +795,11 @@ func Day(room Room) {
 			ServerSend(room, "法官:用户"+item.OpenID+"死亡,请他发言")
 			time.Sleep(time.Second * 30)
 			room.User[l] = item
+		}
+	}
+	for l, item := range PlayRoom {
+		if item.Owner == room.Owner {
+			PlayRoom[l] = room
 		}
 	}
 }
