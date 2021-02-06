@@ -418,6 +418,7 @@ func WwKill(user string, room Room, look string, ch chan string) {
 	kill := ""
 	b := 0
 	for _, item := range room.User {
+		log.Println(item.Score, "票数")
 		if item.OpenID == look {
 			item.Score = item.Score + 1
 		}
