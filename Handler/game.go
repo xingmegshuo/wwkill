@@ -269,8 +269,9 @@ func RoomSocket(conn []byte) {
 				}
 				if value.Message[:6] == "暗杀" {
 					// 狼人杀人
-					go WwKill(value.User, room, value.Message[6:], ch)
+					go WwKill(value.User, room, value.Message[6:])
 					sock = 0
+					log.Println(room)
 				}
 				if value.Message[:6] == "杀人" {
 					// 猎人杀人
@@ -279,8 +280,9 @@ func RoomSocket(conn []byte) {
 				}
 				if value.Message[:6] == "投票" {
 					// 大家投票
-					go WwKill(value.User, room, value.Message[6:], ch)
+					go WwKill(value.User, room, value.Message[6:])
 					sock = 0
+					log.Println(room)
 				}
 				go Gaming(room, ch, sock)
 			}
@@ -349,15 +351,24 @@ func Leave(user string, room Room) Room {
 }
 
 // 等待死亡
-func WaitSave(room Room, user string) string {
-	mes := ""
-	for _, item := range room.User {
+func WaitSave(room Room, user string) {
+	for l, item := range room.User {
 		if item.OpenID == user {
-			mes = item.OpenID
+			item.Survive = 2
+			room.User[l] = item
 			break
 		}
 	}
-	return mes
+	Update(room)
+}
+
+// 更新
+func Update(room Room) {
+	for i, ro := range PlayRoom {
+		if ro.Owner == room.Owner {
+			PlayRoom[i] = room
+		}
+	}
 }
 
 // 用户死亡
@@ -369,24 +380,19 @@ func Die(room Room, user string) {
 			break
 		}
 	}
-	l := ""
-	for i, ro := range PlayRoom {
-		if ro.Owner == room.Owner {
-			l = i
-		}
-	}
-	PlayRoom[l] = room
+	Update(room)
 }
 
 // 救活用户
-func Save(room Room, user string) Room {
-	for _, item := range room.User {
+func Save(room Room, user string) {
+	for l, item := range room.User {
 		if item.OpenID == user {
 			item.Survive = 1
+			room.User[l] = item
 			break
 		}
 	}
-	return room
+	Update(room)
 }
 
 // 猎人杀人
@@ -413,11 +419,7 @@ func Read(ch chan string, room Room) {
 }
 
 // 狼人杀人
-func WwKill(user string, room Room, look string, ch chan string) {
-	score := 0
-	kill := ""
-	b := 0
-	all := 0
+func WwKill(user string, room Room, look string) {
 	for l, item := range room.User {
 		if item.OpenID == look {
 			item.Score = item.Score + 1
@@ -425,22 +427,9 @@ func WwKill(user string, room Room, look string, ch chan string) {
 		if item.OpenID == user {
 			Send(item.Ws, "您投票给"+look)
 		}
-		if item.Score > score {
-			score = item.Score
-			kill = item.OpenID
-		}
-		if item.Identity == "女巫" && item.Survive != 0 {
-			b = 1
-		}
 		room.User[l] = item
-		all += item.Score
 	}
-	log.Println(all)
-	if b == 0 {
-		ch <- "died" + kill
-	} else {
-		ch <- "diew" + kill
-	}
+	Update(room)
 }
 
 // 女巫救人
@@ -766,11 +755,7 @@ func Day(room Room) {
 			room.User[l] = item
 		}
 	}
-	for l, item := range PlayRoom {
-		if item.Owner == room.Owner {
-			PlayRoom[l] = room
-		}
-	}
+	Update(room)
 	for _, item := range room.User {
 		if item.Survive == 1 {
 			item.Survive = 0
@@ -795,9 +780,5 @@ func Day(room Room) {
 			room.User[l] = item
 		}
 	}
-	for l, item := range PlayRoom {
-		if item.Owner == room.Owner {
-			PlayRoom[l] = room
-		}
-	}
+	Update(room)
 }
