@@ -433,6 +433,7 @@ func WwKill(user string, room Room, look string, ch chan string) {
 			b = 1
 		}
 	}
+	log.Println(room.User)
 	if b == 0 {
 		ch <- "died" + kill
 	} else {
