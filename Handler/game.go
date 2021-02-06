@@ -422,6 +422,7 @@ func WwKill(user string, room Room, look string, ch chan string) {
 		if item.OpenID == look {
 			item.Score = item.Score + 1
 		}
+		log.Println(item.Survive)
 		if item.Survive != 0 {
 			c = c + 1
 		}
