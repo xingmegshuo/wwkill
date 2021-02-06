@@ -434,6 +434,7 @@ func WwKill(user string, room Room, look string, ch chan string) {
 		}
 		room.User[l] = item
 	}
+	log.Println(kill, "------------杀人")
 	if b == 0 {
 		ch <- "died" + kill
 	} else {
@@ -770,7 +771,6 @@ func Day(room Room) {
 			ServerSend(room, "法官:请用户"+item.OpenID+"发言")
 			// time.Sleep(time.Second * 30)
 			time.Sleep(time.Second * 2)
-
 		}
 	}
 	ServerSend(room, "法官:请用户投票")
