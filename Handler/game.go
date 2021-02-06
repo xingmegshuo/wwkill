@@ -417,6 +417,7 @@ func WwKill(user string, room Room, look string, ch chan string) {
 	score := 0
 	kill := ""
 	b := 0
+	all := 0
 	for l, item := range room.User {
 		if item.OpenID == look {
 			item.Score = item.Score + 1
@@ -432,8 +433,9 @@ func WwKill(user string, room Room, look string, ch chan string) {
 			b = 1
 		}
 		room.User[l] = item
+		all += item.Score
 	}
-	log.Println(score)
+	log.Println(all)
 	if b == 0 {
 		ch <- "died" + kill
 	} else {
