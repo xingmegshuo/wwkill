@@ -271,7 +271,6 @@ func RoomSocket(conn []byte) {
 					// 狼人杀人
 					go WwKill(value.User, room, value.Message[6:])
 					sock = 0
-					log.Println(room)
 				}
 				if value.Message[:6] == "杀人" {
 					// 猎人杀人
@@ -282,7 +281,6 @@ func RoomSocket(conn []byte) {
 					// 大家投票
 					go WwKill(value.User, room, value.Message[6:])
 					sock = 0
-					log.Println(room)
 				}
 				go Gaming(room, ch, sock)
 			}
@@ -301,12 +299,11 @@ func Gaming(room Room, ch chan string, sock int) {
 				if a == 1 {
 					ServerSend(room, "法官:start Game!!!!")
 				}
-				wait := ""
 				ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
 				time.Sleep(time.Second * 2)
-				Black(room, strconv.Itoa(a), wait)
+				Black(room, strconv.Itoa(a), ch)
 				ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
-				Day(room)
+				Day(room, ch)
 				a = a + 1
 			}
 			over := Over(room)
@@ -707,8 +704,29 @@ func Over(room Room) int {
 	return 0
 }
 
+// 投票结果
+func Result(ch chan string, room Room) {
+	score := 0
+	kill := ""
+	wait := 0
+	for _, item := range room.User {
+		if item.Score > score && item.Survive != 0 {
+			score = item.Score
+			kill = item.OpenID
+		}
+		if item.Identity == "女巫" && item.Survive != 0 {
+			wait = 1
+		}
+	}
+	if wait == 1 {
+		ch <- "waitSave" + kill
+	} else {
+		ch <- "died" + kill
+	}
+}
+
 // 天黑阶段
-func Black(room Room, day string, wait string) {
+func Black(room Room, day string, ch chan string) {
 	ServerSend(room, "法官:天黑了")
 	time.Sleep(time.Second * 3)
 	ServerWw(room, "请狼人开始行动")
@@ -716,22 +734,27 @@ func Black(room Room, day string, wait string) {
 		if item.Survive != 0 && item.Identity == "预言家" {
 			ServerGod(room, "请预言家查验身份")
 			time.Sleep(time.Second * 20)
-			continue
-		} else {
-			if item.Survive != 0 && item.Identity == "女巫" {
-				ServerWi(room, "请女巫选择是否用药")
-				time.Sleep(time.Second * 20)
-				if wait != "" {
-					ServerWi(room, "昨晚上被杀的是"+wait+"是否救一下")
-				}
+		}
+	}
+	// 统计狼人投票结果
+	go Result(ch, room)
+	wait := ""
+	for _, item := range room.User {
+		if item.Survive == 2 {
+			wait = item.OpenID
+		}
+		if item.Survive != 0 && item.Identity == "女巫" {
+			ServerWi(room, "请女巫选择是否用药")
+			time.Sleep(time.Second * 20)
+			if wait != "" {
+				ServerWi(room, "昨晚上被杀的是"+wait+"是否救一下")
 			}
 		}
-
 	}
 }
 
 // 白天阶段
-func Day(room Room) {
+func Day(room Room, ch chan string) {
 	ServerSend(room, "法官:天亮了")
 	for l, item := range room.User {
 		if item.Survive == 3 {
@@ -760,12 +783,13 @@ func Day(room Room) {
 		if item.Survive == 1 {
 			item.Survive = 0
 			ServerSend(room, "法官:请用户"+item.OpenID+"发言")
-			// time.Sleep(time.Second * 30)
-			time.Sleep(time.Second * 2)
+			time.Sleep(time.Second * 30)
+			// time.Sleep(time.Second * 2)
 		}
 	}
 	ServerSend(room, "法官:请用户投票")
 	time.Sleep(time.Second * 15)
+	go Result(ch, room)
 	for l, item := range room.User {
 		if item.Survive == 3 {
 			ServerSend(room, "法官:死亡用户,"+item.OpenID)
