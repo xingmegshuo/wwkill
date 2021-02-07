@@ -747,7 +747,6 @@ func Black(room Room, day string, ch chan string) {
 	go Result(ch, room)
 	wait := ""
 	for _, item := range room.User {
-		log.Println(item.OpenID, "-----", item.Survive)
 		if item.Survive == 2 {
 			wait = item.OpenID
 		}
@@ -764,6 +763,7 @@ func Black(room Room, day string, ch chan string) {
 // 白天阶段
 func Day(room Room, ch chan string) {
 	ServerSend(room, "法官:天亮了")
+	log.Println(room.User,"天亮----------")
 	for l, item := range room.User {
 		if item.Survive == 3 {
 			ServerSend(room, "法官:死亡用户,"+item.OpenID)
