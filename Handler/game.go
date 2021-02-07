@@ -301,9 +301,9 @@ func Gaming(room Room, ch chan string, sock int) {
 				}
 				ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
 				time.Sleep(time.Second * 2)
-				Black(room, strconv.Itoa(a), ch)
+				go Black(room, strconv.Itoa(a), ch)
 				ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
-				Day(room, ch)
+				go Day(room, ch)
 				a = a + 1
 			}
 			over := Over(room)
