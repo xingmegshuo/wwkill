@@ -301,9 +301,9 @@ func Gaming(room Room, ch chan string, sock int) {
 				}
 				ServerSend(room, "法官:第"+strconv.Itoa(a)+"天")
 				time.Sleep(time.Second * 2)
-				go Black(room, strconv.Itoa(a), ch)
+				Black(room, strconv.Itoa(a), ch)
 				ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
-				go Day(room, ch)
+				Day(room, ch)
 				a = a + 1
 			}
 			over := Over(room)
@@ -748,7 +748,7 @@ func Black(room Room, day string, ch chan string) {
 	ServerWw(room, "请狼人开始行动")
 	time.Sleep(time.Second * 20)
 	// 统计狼人投票结果
-	go Result(ch, room)
+	Result(ch, room)
 	wait := ""
 	for _, item := range room.User {
 		if item.Survive == 2 {
@@ -801,7 +801,7 @@ func Day(room Room, ch chan string) {
 	}
 	ServerSend(room, "法官:请用户投票")
 	time.Sleep(time.Second * 15)
-	go Result(ch, room)
+	Result(ch, room)
 	for l, item := range room.User {
 		if item.Survive == 3 {
 			ServerSend(room, "法官:死亡用户,"+item.OpenID)
