@@ -718,16 +718,18 @@ func Result(ch chan string, room Room) {
 			wait = 1
 		}
 	}
-	log.Println(room.User, "--------")
-	if wait == 1 {
-		ch <- "waitSave" + kill
-	} else {
-		ch <- "died" + kill
-	}
 	for _, item := range room.User {
 		item.Score = 0
 	}
 	Update(room)
+	log.Println(room.User, "--------", kill)
+	if score != 0 {
+		if wait == 1 {
+			ch <- "waitSave" + kill
+		} else {
+			ch <- "died" + kill
+		}
+	}
 }
 
 // 天黑阶段
@@ -745,6 +747,7 @@ func Black(room Room, day string, ch chan string) {
 	go Result(ch, room)
 	wait := ""
 	for _, item := range room.User {
+		log.Println(item.OpenID, "-----", item.Survive)
 		if item.Survive == 2 {
 			wait = item.OpenID
 		}
