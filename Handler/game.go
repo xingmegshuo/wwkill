@@ -736,13 +736,13 @@ func Result(ch chan string, room Room) {
 func Black(room Room, day string, ch chan string) {
 	ServerSend(room, "法官:天黑了")
 	time.Sleep(time.Second * 3)
-	ServerWw(room, "请狼人开始行动")
 	for _, item := range room.User {
 		if item.Survive != 0 && item.Identity == "预言家" {
 			ServerGod(room, "请预言家查验身份")
-			time.Sleep(time.Second * 20)
 		}
 	}
+	ServerWw(room, "请狼人开始行动")
+	time.Sleep(time.Second * 20)
 	// 统计狼人投票结果
 	go Result(ch, room)
 	wait := ""
