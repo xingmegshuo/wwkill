@@ -370,6 +370,7 @@ func Update(room Room) {
 
 // 用户死亡
 func Die(room Room, user string) {
+	log.Println("死人")
 	for l, item := range room.User {
 		if item.OpenID == user {
 			item.Survive = 3
@@ -722,7 +723,6 @@ func Result(ch chan string, room Room) {
 		item.Score = 0
 	}
 	Update(room)
-	log.Println(room.User, "--------", kill)
 	if score != 0 {
 		if wait == 1 {
 			ch <- "waitSave" + kill
@@ -763,7 +763,7 @@ func Black(room Room, day string, ch chan string) {
 // 白天阶段
 func Day(room Room, ch chan string) {
 	ServerSend(room, "法官:天亮了")
-	log.Println(room.User,"天亮----------")
+	log.Println(room.User, "天亮----------")
 	for l, item := range room.User {
 		if item.Survive == 3 {
 			ServerSend(room, "法官:死亡用户,"+item.OpenID)
