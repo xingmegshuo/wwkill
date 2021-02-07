@@ -718,12 +718,15 @@ func Result(ch chan string, room Room) {
 			wait = 1
 		}
 	}
-	log.Println("room", room.User, kill)
 	if wait == 1 {
 		ch <- "waitSave" + kill
 	} else {
 		ch <- "died" + kill
 	}
+	for _, item := range room.User {
+		item.Score = 0
+	}
+	Update(room)
 }
 
 // 天黑阶段
