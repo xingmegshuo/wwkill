@@ -707,6 +707,7 @@ func Over(room Room) int {
 
 // 投票结果
 func Result(ch chan string, room Room) {
+	log.Println("计算")
 	score := 0
 	kill := ""
 	wait := 0
@@ -723,6 +724,7 @@ func Result(ch chan string, room Room) {
 		item.Score = 0
 	}
 	Update(room)
+	log.Println(score, kill)
 	if score != 0 {
 		if wait == 1 {
 			ch <- "waitSave" + kill
