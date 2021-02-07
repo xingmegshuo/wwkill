@@ -767,6 +767,7 @@ func Black(room Room, day string, ch chan string) {
 // 白天阶段
 func Day(room Room, ch chan string) {
 	ServerSend(room, "法官:天亮了")
+	time.Sleep(time.Second * 2)
 	log.Println(room.User, "天亮----------")
 	for l, item := range room.User {
 		if item.Survive == 3 {
