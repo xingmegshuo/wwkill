@@ -408,6 +408,7 @@ func Read(ch chan string, room Room) {
 	mes, _ := <-ch
 	switch mes[:4] {
 	case "died":
+		log.Println(mes, "是否接收到死人")
 		Die(room, mes[4:])
 	case "save":
 		Save(room, mes[4:])
@@ -729,6 +730,7 @@ func Result(ch chan string, room Room) {
 		if wait == 1 {
 			ch <- "waitSave" + kill
 		} else {
+			log.Println("发送死人")
 			ch <- "died" + kill
 		}
 	}
