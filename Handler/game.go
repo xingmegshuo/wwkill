@@ -293,8 +293,8 @@ func Gaming(room Room, ch chan string, sock int) {
 	a := 1
 	start := Start(room)
 	if start == 0 {
-		go Read(ch, room)
 		for {
+			Read(ch, room)
 			if sock == 1 {
 				if a == 1 {
 					ServerSend(room, "法官:start Game!!!!")
