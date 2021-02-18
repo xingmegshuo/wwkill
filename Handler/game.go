@@ -803,6 +803,7 @@ func Day(room Room, ch chan string) {
 	ServerSend(room, "法官:请用户投票")
 	time.Sleep(time.Second * 15)
 	Result(ch, room)
+	log.Println(room.User,"-----投票用户")
 	time.Sleep(time.Second * 2)
 	for l, item := range room.User {
 		if item.Survive == 3 {
