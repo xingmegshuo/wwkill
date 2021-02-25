@@ -41,6 +41,8 @@ func GetRecord(mes []byte) string {
 // 获取战绩信息
 func GetRecordAll(mes []byte) string {
 	err := json.Unmarshal(mes, &user)
+	log.Println("获取战绩信息func")
+
 	if err != nil {
 		log.Println("数据问题:", err.Error())
 		return ToMes("error", "获取战绩失败,数据无法解析")
@@ -66,9 +68,9 @@ func RecordToString(status string, records []Mydb.Record, mes string) string {
 	for l, item := range records {
 		if len(item.GameMode) > 0 && l < 10 {
 			if l == len(records)-1 {
-				str = str + "{'gameType':'" + item.GameMode + "','runAway':'" + strconv.Itoa(item.RunAway) + "','gameTime':'" + item.GameTime.String() + "','identity':'" + item.Identity + "','result':'" + item.Result + "'}"
+				str = str + "{'gameType':'" + item.GameMode + "','runAway':'" + strconv.Itoa(item.RunAway) + "','gameTime':'" + item.GameTime + "','identity':'" + item.Identity + "','result':'" + item.Result + "'}"
 			} else {
-				str = str + "{'gameType':'" + item.GameMode + "','runAway':'" + strconv.Itoa(item.RunAway) + "','gameTime':'" + item.GameTime.String() + "','identity':'" + item.Identity + "','result':'" + item.Result + "'},"
+				str = str + "{'gameType':'" + item.GameMode + "','runAway':'" + strconv.Itoa(item.RunAway) + "','gameTime':'" + item.GameTime + "','identity':'" + item.Identity + "','result':'" + item.Result + "'},"
 			}
 		}
 	}

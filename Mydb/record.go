@@ -10,13 +10,12 @@ package Mydb
 
 import (
 	"log"
-	"time"
 )
 
 type Record struct {
 	Id       int64
 	User     int       `xorm:"User_id`
-	GameTime time.Time `xorm:"text"`
+	GameTime string `xorm:"text"`
 	Identity string    `xorm:"integer"`
 	GameMode string    `xorm:"varchar(255)"`
 	RunAway  int       `xorm:"integer"`
