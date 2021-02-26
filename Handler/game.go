@@ -30,13 +30,14 @@ type Player struct {
 	Ws       *websocket.Conn
 	Ready    int
 	Score    int
+	Status   string
 }
 
 type Room struct {
 	GameMode string
 	People   int
 	Public   int
-	Stop 	 int
+	Stop     int
 	User     []Player
 	Owner    string
 	Ww       int //狼人
@@ -70,6 +71,127 @@ func GameStart(mes []byte, ws *websocket.Conn) string {
 	}
 	message := Init(ws, room)
 	return ToMes("roomID", message)
+}
+
+// 查找房间
+func SearchRoom(GameType string) Room {
+	var room Room
+	new := "true"
+	for _, v := range PlayRoom {
+		if len(v.User) < v.People && v.Public == 1 && v.GameMode == GameType && v.Stop == 0 {
+			room = v
+			new = "false"
+			break
+		}
+	}
+	if new == "true" || len(PlayRoom) == 0 {
+		room = NewRoom(GameType)
+	}
+	return room
+
+}
+
+// 新建房间
+func NewRoom(GameType string) Room {
+	var room Room
+	switch GameType {
+	case "新手场":
+		room = Room{
+			GameMode: "新手场",
+			People:   6,
+			Public:   1,
+			Stop:     0,
+			Ww:       2,
+			God:      1,
+			Ci:       2,
+			Hu:       1,
+			Wi:       0,
+		}
+	case "普通场":
+		room = Room{
+			GameMode: "普通场",
+			People:   9,
+			Public:   1,
+			Stop:     0,
+			Ww:       3,
+			God:      1,
+			Ci:       3,
+			Hu:       1,
+			Wi:       1,
+		}
+
+	case "高手场":
+		room = Room{
+			GameMode: "高手场",
+			People:   10,
+			Public:   1,
+			Stop:     0,
+			Ww:       3,
+			Hu:       7,
+			God:      0,
+			Ci:       0,
+			Wi:       0,
+		}
+	}
+	return room
+}
+
+// 加入房间
+func Join(room Room, player Player) Room {
+	add := 0
+	for l, ro := range room.User {
+		if ro.OpenID == player.OpenID {
+			add = 1
+			room.User[l] = player
+		}
+	}
+	if add == 0 {
+		room.User = append(room.User, player)
+	}
+	ServerSend(room, player.OpenID+":用户"+player.OpenID+"进入房间")
+	Update(room)
+	return room
+}
+
+// 获取房间号
+func GetRoomID(room Room) string {
+	for l, ro := range PlayRoom {
+		if ro.Owner == room.Owner {
+			return l
+		}
+	}
+	return "null"
+}
+
+// 初始化改变用户状态,由在线换为游戏中
+func Init(ws *websocket.Conn, room Room) string {
+	// openId 赋值给游戏中用户
+	client_palyer[ws] = client_user[ws]
+	// 把用户从在线用户移除
+	delete(client_user, ws)
+	player := Player{
+		OpenID:  client_palyer[ws],
+		Ws:      ws,
+		Survive: 1,
+		Status:  "true",
+	}
+	if len(room.User) == 0 {
+		room.Owner = player.OpenID
+		room = Join(room, player)
+	} else {
+		room = Join(room, player)
+	}
+	str := ""
+	for l, item := range room.User {
+		if l == len(room.User)-1 {
+			str = str + "" + item.OpenID + ":" + strconv.Itoa(item.Ready) + ""
+		} else {
+			str = str + "" + item.OpenID + ":" + strconv.Itoa(item.Ready) + ","
+		}
+	}
+	str = str + ":房间总人数"
+	ServerSend(room, str)
+	return GetRoomID(room)
 }
 
 // 结束游戏
@@ -128,98 +250,6 @@ func GameOver(room Room, over int) {
 	}
 }
 
-// 查找房间
-func SearchRoom(GameType string) Room {
-	var room Room
-	if len(PlayRoom) == 0 {
-		room = NewRoom(GameType)
-	} else {
-		for _, v := range PlayRoom {
-			if len(v.User) < v.People && v.Public == 1 && v.GameMode == GameType && v.Stop == 0 {
-				room = v
-				break
-			} else {
-				room = Room{
-					Owner: "null",
-				}
-			}
-		}
-	}
-	if room.Owner != "null" {
-		return room
-	} else {
-		room = NewRoom(GameType)
-		return room
-	}
-}
-
-// 新建房间
-func NewRoom(GameType string) Room {
-	var room Room
-	switch GameType {
-	case "新手场":
-		room = Room{
-			GameMode: "新手场",
-			People:   6,
-			Public:   1,
-			Stop :	0,
-			Ww:       2,
-			God:      1,
-			Ci:       2,
-			Hu:       1,
-			Wi:       0,
-		}
-	case "普通场":
-		room = Room{
-			GameMode: "普通场",
-			People:   9,
-			Public:   1,
-			Stop :	0,
-			Ww:       3,
-			God:      1,
-			Ci:       3,
-			Hu:       1,
-			Wi:       1,
-		}
-
-	case "高手场":
-		room = Room{
-			GameMode: "高手场",
-			People:   10,
-			Public:   1,
-			Stop :	0,
-			Ww:       3,
-			Hu:       7,
-			God:      0,
-			Ci:       0,
-			Wi:       0,
-		}
-	}
-	return room
-
-}
-
-// 加入房间
-func Join(room Room, player Player) Room {
-	ServerSend(room, player.OpenID+":用户"+player.OpenID+"进入房间")
-	for _, ro := range PlayRoom{
-		if ro.Owner == room.Owner && ro.Stop == 0{
-			room = ro
-		}
-	}
-	add := 0
-	for l, ro := range room.User {
-		if ro.OpenID == player.OpenID {
-			add = 1
-			room.User[l] = player
-		}
-	}
-	if add == 0 {
-		room.User = append(room.User, player)
-	}
-	return room
-}
-
 // 房间连接
 func RoomSocket(conn []byte) {
 	var value Mes
@@ -228,11 +258,12 @@ func RoomSocket(conn []byte) {
 		log.Println("连接断开", err)
 		// todo 退出
 	} else {
-		for l, room := range PlayRoom {
+		for _, room := range PlayRoom {
+			IsOutline(room)
 			if room.Owner == value.Room {
 				sock := 1
 				if value.Message[:6] == "准备" {
-					room = Re(room, value.User)
+					Re(room, value.User)
 					ready := Ready(room)
 					if ready == 1 {
 						ServerSend(room, "法官:所有人已准备，游戏5秒后开始!")
@@ -242,12 +273,11 @@ func RoomSocket(conn []byte) {
 				}
 				if value.Message[:6] == "身份" {
 					// to do 分配身份
-					room = Iden(room, value.User, value.Message[6:])
-					PlayRoom[l] = room
+					Iden(room, value.User, value.Message[6:])
 				}
 				if value.Message[:6] == "离开" {
 					// 退出房间
-					room = Leave(value.User, room)
+					Leave(value.User, room)
 					sock = 0
 				}
 				if value.Message[:6] == "查验" {
@@ -278,10 +308,19 @@ func RoomSocket(conn []byte) {
 					WwKill(value.User, room, value.Message[6:])
 					sock = 0
 				}
-				if sock ==1{
+				if sock == 1 {
 					Gaming(room)
 				}
 			}
+		}
+	}
+}
+
+// 判断是否离线
+func IsOutline(room Room) {
+	for _, u := range room.User {
+		if _, ok := client_palyer[u.Ws]; !ok {
+			Remove(u.OpenID)
 		}
 	}
 }
@@ -290,7 +329,7 @@ func RoomSocket(conn []byte) {
 func Gaming(room Room) {
 	start := Start(room)
 	if start == 0 {
-		for _, a := range []int{1,2,3,4,5,6,7}{
+		for _, a := range []int{1, 2, 3, 4, 5, 6, 7} {
 			// Update(room)
 			if a == 1 {
 				ServerSend(room, "法官:start Game!!!!")
@@ -299,18 +338,16 @@ func Gaming(room Room) {
 			time.Sleep(time.Second * 2)
 			Black(room, strconv.Itoa(a))
 			ServerSend(room, "第"+strconv.Itoa(a)+"天:天亮了请睁眼")
-			b := Day(room,a)
-			if b == 1{
+			b := Day(room, a)
+			if b == 1 {
 				break
 			}
 		}
 	}
 }
 
-
-
 // 判断是否结束
-func IsOver(room Room) int{
+func IsOver(room Room) int {
 	over := Over(room)
 	if over == 1 {
 		ServerSend(room, "游戏结束,平民胜利")
@@ -346,29 +383,19 @@ func IsOver(room Room) int{
 }
 
 // 退出房间
-func Leave(user string, room Room) Room {
+func Leave(user string, room Room) {
 	a := 0
-	ServerSend(room,user+":退出房间")
-	for l, item := range room.User {
-		if item.OpenID == user {
-			a = l
-			client_user[item.Ws] = client_palyer[item.Ws]
-			delete(client_palyer, item.Ws)
-		}
-	}
+	ServerSend(room, user+":退出房间")
 	// 删除用户
-	for l, ro := range PlayRoom {
-		if ro.Owner == room.Owner {
-			if len(room.User) ==1  {
-				delete(PlayRoom, l)
-			} else {
-				room.User = append(room.User[:a], room.User[a+1:]...)
-				PlayRoom[l] = room
-			}
+	for i, u := range room.User {
+		if u.OpenID == user {
+			a = i
+			client_user[u.Ws] = client_palyer[u.Ws]
+			delete(client_palyer, u.Ws)
 		}
 	}
-
-	return room
+	room.User = append(room.User[:a], room.User[a+1:]...)
+	Update(room)
 }
 
 // 等待死亡
@@ -389,6 +416,9 @@ func Update(room Room) {
 		if ro.Owner == room.Owner {
 			PlayRoom[i] = room
 		}
+		if len(ro.User) == 0 {
+			delete(PlayRoom, i)
+		}
 	}
 }
 
@@ -405,7 +435,7 @@ func Die(room Room, user string) {
 }
 
 // 枪杀
-func HuDie(room Room, user string){
+func HuDie(room Room, user string) {
 	for l, item := range room.User {
 		if item.OpenID == user {
 			item.Survive = 4
@@ -415,7 +445,6 @@ func HuDie(room Room, user string){
 	}
 	Update(room)
 }
-
 
 // 救活用户
 func Save(room Room, user string) {
@@ -433,13 +462,11 @@ func Save(room Room, user string) {
 func HuKill(user string, room Room, look string) {
 	for _, item := range room.User {
 		if item.OpenID == user {
-			HuDie(room,look)
+			HuDie(room, look)
 			SendMS(item.Ws, "您开枪带走了"+look)
 		}
 	}
 }
-
-
 
 // 狼人杀人
 func WwKill(user string, room Room, look string) {
@@ -459,7 +486,7 @@ func WwKill(user string, room Room, look string) {
 func WiSave(user string, room Room, look string) {
 	for _, item := range room.User {
 		if item.OpenID == user {
-			Save(room,look)
+			Save(room, look)
 			SendMS(item.Ws, "您用解药救了"+look)
 		}
 	}
@@ -484,75 +511,27 @@ func LookIden(user string, room Room, look string) {
 func WiKill(user string, room Room, look string) {
 	for _, item := range room.User {
 		if item.OpenID == user {
-			Die(room,look)
+			Die(room, look)
 			SendMS(item.Ws, "您用毒药毒死了"+look)
 		}
 	}
 }
 
-// 初始化改变用户状态,由在线换为游戏中
-func Init(ws *websocket.Conn, room Room) string {
-	// openId 赋值给游戏中用户
-	client_palyer[ws] = client_user[ws]
-	// 把用户从在线用户移除
-	delete(client_user, ws)
-	if len(client_palyer[ws])>0{
-		player := Player{
-			OpenID:  client_palyer[ws],
-			Ws:      ws,
-			Survive: 1,
-		}
-		if len(room.User) == 0 {
-			room.Owner = player.OpenID
-			room = Join(room, player)
-		} else {
-			room = Join(room, player)
-		}
-		real := "-1"
-		for l, ro := range PlayRoom {
-			if ro.Owner == room.Owner {
-				real = l
-			} 
-		}
-
-		
-		if real != "-1" {
-			PlayRoom[real] = room
-		} else {
-			PlayRoom[room.Owner] = room
-		}
-		str := ""
-		for l, item := range room.User {
-			if l == len(room.User)-1 {
-				str = str + "" + item.OpenID + ":" + strconv.Itoa(item.Ready) + ""
-			} else {
-				str = str + "" + item.OpenID + ":" + strconv.Itoa(item.Ready) + ","
-			}
-		}
-		str = str + ":房间总人数"
-		SendMS(player.Ws, str)
-		return room.Owner
-	}else{
-		return "null"
-	}
-
-}
-
-// 移出房间
-func Remove(str string){
+// 房间内设置掉线
+func Remove(str string) {
 	for l, item := range PlayRoom {
-		for n, user := range item.User{
+		for n, user := range item.User {
 			if user.OpenID == str {
 				delete(client_palyer, user.Ws)
-				item.User = append(item.User[:n], item.User[n+1:]...)
+				user.Status = "false"
+				item.User[n] = user
 			}
 		}
 		PlayRoom[l] = item
 	}
 }
 
-
-// 退出匹配或者退出房间或者退出游戏
+// 房间内设置掉线
 func Close(ws *websocket.Conn) {
 	Remove(client_palyer[ws])
 }
@@ -560,14 +539,16 @@ func Close(ws *websocket.Conn) {
 // 发送服务器公告信息
 func ServerSend(room Room, str string) {
 	for _, U := range room.User {
-		SendMS(U.Ws, str)
+		if U.Status == "true" {
+			SendMS(U.Ws, str)
+		}
 	}
 }
 
 // 发送给狼人
 func ServerWw(room Room, str string) {
 	for _, U := range room.User {
-		if U.Identity == "狼人" && U.Survive == 1 {
+		if U.Identity == "狼人" && U.Survive == 1 && U.Status == "true" {
 			SendMS(U.Ws, str)
 		}
 	}
@@ -576,7 +557,7 @@ func ServerWw(room Room, str string) {
 // 发送给预言家
 func ServerGod(room Room, str string) {
 	for _, U := range room.User {
-		if U.Identity == "预言家" && U.Survive == 1 {
+		if U.Identity == "预言家" && U.Survive == 1 && U.Status == "true" {
 			SendMS(U.Ws, str)
 		}
 	}
@@ -585,7 +566,7 @@ func ServerGod(room Room, str string) {
 // 发送给女巫
 func ServerWi(room Room, str string) {
 	for _, U := range room.User {
-		if U.Identity == "女巫" && U.Survive == 1 {
+		if U.Identity == "女巫" && U.Survive == 1 && U.Status == "true" {
 			SendMS(U.Ws, str)
 		}
 	}
@@ -600,9 +581,9 @@ func Ready(room Room) int {
 		}
 	}
 	if a == room.People {
-		for l, item := range PlayRoom{
-			if item.Owner == room.Owner{
-				item.Stop =1
+		for l, item := range PlayRoom {
+			if item.Owner == room.Owner {
+				item.Stop = 1
 				PlayRoom[l] = item
 			}
 		}
@@ -613,7 +594,7 @@ func Ready(room Room) int {
 }
 
 // 用户准备
-func Re(room Room, user string) Room {
+func Re(room Room, user string) {
 	for l, item := range room.User {
 		if item.OpenID == user {
 			if item.Ready == 0 {
@@ -626,7 +607,7 @@ func Re(room Room, user string) Room {
 			room.User[l] = item
 		}
 	}
-	return room
+	Update(room)
 }
 
 // 游戏开始
@@ -641,7 +622,7 @@ func Start(room Room) int {
 }
 
 // 身份分配
-func Iden(room Room, user string, iden string) Room {
+func Iden(room Room, user string, iden string) {
 	for l, item := range room.User {
 		if item.OpenID == user {
 			switch iden {
@@ -686,14 +667,12 @@ func Iden(room Room, user string, iden string) Room {
 					room.God = room.God - 1
 					idenstr = "预言家"
 					item.Identity = idenstr
-
 					break
 				}
 				if room.Hu > 0 {
 					room.Hu = room.Hu - 1
 					idenstr = "猎人"
 					item.Identity = idenstr
-
 					break
 				}
 				if room.Wi > 0 {
@@ -709,12 +688,13 @@ func Iden(room Room, user string, iden string) Room {
 					break
 				}
 			}
-			log.Println(room.Owner,"-------------",item.Identity,user)
+			log.Println(room.Owner, "-------------", item.Identity, user)
 			SendMS(item.Ws, "您的身份是:"+item.Identity)
 		}
 		room.User[l] = item
 	}
-	return room
+	Update(room)
+
 }
 
 // 判断是否结束游戏
@@ -782,9 +762,9 @@ func Result(room Room) {
 	Update(room)
 	if score != 0 {
 		if wait == 1 {
-			WaitSave(room,kill)
+			WaitSave(room, kill)
 		} else {
-			Die(room,kill)
+			Die(room, kill)
 		}
 	}
 }
@@ -818,7 +798,7 @@ func Black(room Room, day string) {
 }
 
 // 白天阶段
-func Day(room Room,a int) int {
+func Day(room Room, a int) int {
 	ServerSend(room, "法官:天亮了")
 	time.Sleep(time.Second * 2)
 	for l, item := range room.User {
@@ -830,12 +810,12 @@ func Day(room Room,a int) int {
 			if item.Identity == "猎人" {
 				ServerSend(room, "法官:用户"+item.OpenID+"死亡,他的身份是猎人请他发动技能")
 				time.Sleep(time.Second * 10)
-				if a == 1{
+				if a == 1 {
 					ServerSend(room, "法官:用户"+item.OpenID+"死亡,请他发言")
 					time.Sleep(time.Second * 30)
 				}
 			} else {
-				if a == 1{
+				if a == 1 {
 					ServerSend(room, "法官:用户"+item.OpenID+"死亡,请他发言")
 					time.Sleep(time.Second * 5)
 				}
@@ -843,15 +823,15 @@ func Day(room Room,a int) int {
 		}
 	}
 	Update(room)
-	for l, item := range room.User{
-		if item.Survive == 4{
+	for l, item := range room.User {
+		if item.Survive == 4 {
 			item.Survive = 0
 			ServerSend(room, "法官:死亡用户,"+item.OpenID)
 			room.User[l] = item
 		}
 	}
 	b := IsOver(room)
-	if b == 1{
+	if b == 1 {
 		return 1
 	}
 	for _, item := range room.User {
@@ -881,8 +861,8 @@ func Day(room Room,a int) int {
 		}
 	}
 	Update(room)
-	for l, item := range room.User{
-		if item.Survive == 4{
+	for l, item := range room.User {
+		if item.Survive == 4 {
 			item.Survive = 0
 			ServerSend(room, "法官:死亡用户,"+item.OpenID)
 			room.User[l] = item
@@ -890,13 +870,11 @@ func Day(room Room,a int) int {
 	}
 	Update(room)
 	b = IsOver(room)
-	if b == 1{
+	if b == 1 {
 		return 1
 	}
 	return 0
 }
-
-
 
 // 发送消息
 func SendMS(ws *websocket.Conn, mes string) {
@@ -906,10 +884,9 @@ func SendMS(ws *websocket.Conn, mes string) {
 	}
 }
 
-
 // 清空投票状态
-func Clear(room Room) Room{
-	for l, item := range room.User{
+func Clear(room Room) Room {
+	for l, item := range room.User {
 		item.Score = 0
 		room.User[l] = item
 	}

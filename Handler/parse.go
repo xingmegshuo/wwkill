@@ -108,6 +108,7 @@ func ParseData(con string, ws *websocket.Conn) {
 // 关闭连接时退出用户
 func CloseUser(ws *websocket.Conn) {
 	delete(client_user, ws)
+	delete(client_palyer, ws)
 }
 
 // 数据返回
