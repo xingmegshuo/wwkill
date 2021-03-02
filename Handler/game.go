@@ -156,7 +156,9 @@ func Join(room Room, player Player) Room {
 // 获取房间号
 func GetRoomID(room Room) string {
 	for l, ro := range PlayRoom {
+		log.Println(ro.Owner)
 		if ro.Owner == room.Owner {
+			log.Println("hhhhhhhhhhhhhhh-房间号")
 			return l
 		}
 	}
@@ -177,6 +179,7 @@ func Init(ws *websocket.Conn, room Room) string {
 	}
 	if len(room.User) == 0 {
 		room.Owner = player.OpenID
+		PlayRoom[room.Owner] = room
 		room = Join(room, player)
 	} else {
 		room = Join(room, player)
@@ -191,6 +194,7 @@ func Init(ws *websocket.Conn, room Room) string {
 	}
 	str = str + ":房间总人数"
 	ServerSend(room, str)
+	log.Println(len(room.User),len(PlayRoom))
 	return GetRoomID(room)
 }
 
@@ -414,10 +418,11 @@ func WaitSave(room Room, user string) {
 func Update(room Room) {
 	for i, ro := range PlayRoom {
 		if ro.Owner == room.Owner {
-			PlayRoom[i] = room
-		}
-		if len(ro.User) == 0 {
-			delete(PlayRoom, i)
+			if len(room.User) ==0{
+				delete(PlayRoom, i)
+			}else{
+				PlayRoom[i] = room
+			}
 		}
 	}
 }
