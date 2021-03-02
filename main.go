@@ -11,15 +11,39 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"wwKill/Handler"
 
 	"golang.org/x/net/websocket"
-	)
+)
 
 var client_map = make(map[*websocket.Conn]string)
 
+// log 输出到文件
+func CreateDir(dir string) (bool, error) {
+	_, err := os.Stat(dir)
+	if err == nil {
+		//directory exists
+		return true, nil
+	}
+	err2 := os.MkdirAll(dir, 0755)
+	if err2 != nil {
+		return false, err2
+	}
+	return true, nil
+}
+
 // 开启服务端
 func main() {
+	res2, err := CreateDir("./LOG")
+	if res2 == false {
+		panic(err)
+	}
+	file, _ := os.OpenFile("./LOG/error.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	defer file.Close()
+	log.SetOutput(file)
+	log.SetPrefix("[Println]")
+	log.SetFlags(log.Llongfile | log.Ldate | log.Ltime)
 	log.Println("服务开启")
 	http.Handle("/", websocket.Handler(Echo))
 
