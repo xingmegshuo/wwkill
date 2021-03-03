@@ -80,27 +80,27 @@ func ParseData(con string, ws *websocket.Conn) {
 		mes := RecomBuddy(info)
 		Send(ws, mes)
 	case "addbuddy":
-		log.Println("添加好友申请")
+		// log.Println("添加好友申请")
 		mes := AddBuddy(info)
 		Send(ws, mes)
 	case "delbuddy":
-		log.Println("删除好友")
+		// log.Println("删除好友")
 		mes := DeleteBuddy(info)
 		Send(ws, mes)
 	case "chat":
-		log.Println("好友聊天")
+		// log.Println("好友聊天")
 		mes := Chat(info)
 		Send(ws, mes)
 	case "getUser":
-		log.Println("获取游戏中信息")
+		// log.Println("获取游戏中信息")
 		mes := GetUserMes(info)
 		Send(ws, mes)
 	case "game":
-		log.Println("开始游戏")
+		// log.Println("开始游戏")
 		mes := GameStart(info, ws)
 		Send(ws, mes)
 	default:
-		log.Println("游戏中")
+		// log.Println("游戏中")
 		go RoomSocket(oldData)
 	}
 }

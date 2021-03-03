@@ -814,3 +814,596 @@
 [Println]2021/03/03 15:23:18 C:/GameObj/wwkill/Handler/game.go:88: 1 几个玩家 房间号 
 [Println]2021/03/03 15:23:18 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
 [Println]2021/03/03 15:23:42 C:/GameObj/wwkill/main.go:47: 服务开启
+[Println]2021/03/03 15:33:20 C:/GameObj/wwkill/main.go:47: 服务开启
+[Println]2021/03/03 15:34:03 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:34:04 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:34:04 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:34:05 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:34:06 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:34:06 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:34:08 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:34:08 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:20 C:/GameObj/wwkill/main.go:47: 服务开启
+[Println]2021/03/03 15:35:38 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:39 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:40 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:40 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:41 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:41 C:/GameObj/wwkill/Handler/login.go:35: 数据问题: unexpected end of JSON input
+[Println]2021/03/03 15:35:41 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:42 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:42 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:35:43 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:35:43 C:/GameObj/wwkill/Handler/game.go:86: 0 几个玩家 0
+[Println]2021/03/03 15:35:43 C:/GameObj/wwkill/Handler/game.go:213: 1 1 房间问题
+[Println]2021/03/03 15:35:43 C:/GameObj/wwkill/Handler/game.go:88: 1 几个玩家 房间号 0007
+[Println]2021/03/03 15:35:43 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/game.go:86: 1 几个玩家 1
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/game.go:213: 2 1 房间问题
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/game.go:88: 2 几个玩家 房间号 0007
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:44 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/game.go:86: 2 几个玩家 2
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/game.go:213: 3 1 房间问题
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/game.go:88: 3 几个玩家 房间号 0007
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:45 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/game.go:86: 3 几个玩家 3
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/game.go:213: 4 1 房间问题
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/game.go:88: 4 几个玩家 房间号 0007
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:35:46 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:00 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:36:00 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/game.go:86: 4 几个玩家 4
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/game.go:213: 5 1 房间问题
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/game.go:88: 5 几个玩家 房间号 0007
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:05 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/game.go:86: 5 几个玩家 5
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/game.go:213: 6 1 房间问题
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/game.go:88: 6 几个玩家 房间号 0007
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:06 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:08 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:36:08 C:/GameObj/wwkill/Handler/game.go:86: 6 几个玩家 0
+[Println]2021/03/03 15:36:08 C:/GameObj/wwkill/Handler/game.go:213: 1 2 房间问题
+[Println]2021/03/03 15:36:08 C:/GameObj/wwkill/Handler/game.go:88: 7 几个玩家 房间号 0001
+[Println]2021/03/03 15:36:08 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/game.go:86: 7 几个玩家 1
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/game.go:213: 2 2 房间问题
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/game.go:88: 8 几个玩家 房间号 0001
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:16 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:36:16 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0007
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/game.go:567: 5 房间人数---------------------
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/game.go:86: 7 几个玩家 5
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/game.go:213: 6 2 房间问题
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/game.go:88: 8 几个玩家 房间号 0007
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:20 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:53 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:36:53 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0004
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/game.go:567: 5 房间人数---------------------
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/game.go:86: 7 几个玩家 5
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/game.go:213: 6 2 房间问题
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/game.go:88: 8 几个玩家 房间号 0007
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:57 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:36:58 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:07 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:08 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:08 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:09 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:09 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:10 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:16 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:37:16 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:37:18 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0005
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/game.go:86: 7 几个玩家 2
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/game.go:213: 3 2 房间问题
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/game.go:88: 8 几个玩家 房间号 0001
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:32 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:37:47 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:37:47 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:37:47 C:/GameObj/wwkill/Handler/game.go:567: 3 房间人数---------------------
+[Println]2021/03/03 15:38:50 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:50 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:51 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:51 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:51 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:52 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:52 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:52 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:53 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:53 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:53 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:54 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:54 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:54 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:55 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:38:55 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:38:59 C:/GameObj/wwkill/main.go:47: 服务开启
+[Println]2021/03/03 15:39:04 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:04 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:05 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:05 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:06 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:06 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:07 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:07 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:07 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:39:08 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:09 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:09 C:/GameObj/wwkill/Handler/game.go:86: 0 几个玩家 0
+[Println]2021/03/03 15:39:09 C:/GameObj/wwkill/Handler/game.go:213: 1 1 房间问题
+[Println]2021/03/03 15:39:09 C:/GameObj/wwkill/Handler/game.go:88: 1 几个玩家 房间号 0008
+[Println]2021/03/03 15:39:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/game.go:86: 1 几个玩家 1
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/game.go:213: 2 1 房间问题
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/game.go:88: 2 几个玩家 房间号 0008
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/game.go:86: 2 几个玩家 2
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/game.go:213: 3 1 房间问题
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/game.go:88: 3 几个玩家 房间号 0008
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:10 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:86: 3 几个玩家 3
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:213: 4 1 房间问题
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:88: 4 几个玩家 房间号 0008
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:86: 4 几个玩家 4
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:213: 5 1 房间问题
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:88: 5 几个玩家 房间号 0008
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:86: 5 几个玩家 5
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:213: 6 1 房间问题
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/game.go:88: 6 几个玩家 房间号 0008
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/game.go:86: 6 几个玩家 0
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/game.go:213: 1 2 房间问题
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/game.go:88: 7 几个玩家 房间号 0006
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/game.go:86: 7 几个玩家 1
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/game.go:213: 2 2 房间问题
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/game.go:88: 8 几个玩家 房间号 0006
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:12 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:14 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:15 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:16 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:16 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:16 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:17 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:25 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:25 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:25 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:25 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:25 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:25 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:39:35 C:/GameObj/wwkill/main.go:72: 客户端丢失
+[Println]2021/03/03 15:39:35 C:/GameObj/wwkill/Handler/parse.go:43: 登录操作:
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0008
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/game.go:86: 7 几个玩家 2
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/game.go:213: 3 2 房间问题
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/game.go:88: 8 几个玩家 房间号 0006
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:39:39 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:43:31 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:43:31 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:43:31 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:43:46 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:43:46 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:43:46 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:18 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:18 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:44:18 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:19 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:19 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:44:19 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:38 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:38 C:/GameObj/wwkill/Handler/game.go:567: 6 房间人数---------------------
+[Println]2021/03/03 15:44:38 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:40 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:40 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:40 C:/GameObj/wwkill/Handler/game.go:567: 5 房间人数---------------------
+[Println]2021/03/03 15:44:42 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:42 C:/GameObj/wwkill/Handler/game.go:567: 4 房间人数---------------------
+[Println]2021/03/03 15:44:42 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:44 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:44 C:/GameObj/wwkill/Handler/game.go:567: 3 房间人数---------------------
+[Println]2021/03/03 15:44:44 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:46 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:46 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:46 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0008
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/game.go:86: 3 几个玩家 2
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/game.go:213: 3 2 房间问题
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/game.go:88: 4 几个玩家 房间号 0006
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:50 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:44:59 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:44:59 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:44:59 C:/GameObj/wwkill/Handler/game.go:567: 3 房间人数---------------------
+[Println]2021/03/03 15:45:01 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:45:01 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:45:01 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:02 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:45:02 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:02 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:07 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:45:07 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0008
+[Println]2021/03/03 15:45:07 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:07 C:/GameObj/wwkill/Handler/game.go:86: 4 几个玩家 0
+[Println]2021/03/03 15:45:07 C:/GameObj/wwkill/Handler/game.go:213: 1 2 房间问题
+[Println]2021/03/03 15:45:07 C:/GameObj/wwkill/Handler/game.go:88: 5 几个玩家 房间号 0002
+[Println]2021/03/03 15:45:07 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0008
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/game.go:86: 5 几个玩家 1
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/game.go:213: 2 2 房间问题
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/game.go:88: 6 几个玩家 房间号 0002
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:09 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0008
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/game.go:567: 2 房间人数---------------------
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/game.go:86: 6 几个玩家 2
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/game.go:213: 3 2 房间问题
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/game.go:88: 7 几个玩家 房间号 0002
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:11 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:99: 开始游戏
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/game.go:65: 清除用户 0008
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/game.go:567: 3 房间人数---------------------
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/game.go:86: 7 几个玩家 3
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/game.go:213: 4 2 房间问题
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/game.go:88: 8 几个玩家 房间号 0002
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:13 C:/GameObj/wwkill/Handler/parse.go:95: 获取游戏中信息
+[Println]2021/03/03 15:45:17 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:45:17 C:/GameObj/wwkill/Handler/game.go:567: 4 房间人数---------------------
+[Println]2021/03/03 15:45:17 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:17 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:45:17 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:45:17 C:/GameObj/wwkill/Handler/game.go:567: 4 房间人数---------------------
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/game.go:567: 4 房间人数---------------------
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/game.go:567: 4 房间人数---------------------
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:55:08 C:/GameObj/wwkill/Handler/game.go:567: 4 房间人数---------------------
+[Println]2021/03/03 15:55:16 C:/GameObj/wwkill/Handler/parse.go:103: 游戏中
+[Println]2021/03/03 15:55:16 C:/GameObj/wwkill/Handler/game.go:567: 1 房间人数---------------------
+[Println]2021/03/03 15:55:16 C:/GameObj/wwkill/Handler/game.go:567: 4 房间人数---------------------

@@ -210,7 +210,7 @@ func Init(ws *websocket.Conn, room Room) string {
 	}
 	str = str + ":房间总人数"
 	ServerSend(room, str)
-	log.Println(len(room.User),len(PlayRoom),"房间问题")
+	log.Println(len(room.User),"用户",len(PlayRoom),"房间个数","房间问题")
 	return GetRoomID(room)
 }
 
