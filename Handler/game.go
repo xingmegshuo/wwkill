@@ -57,9 +57,23 @@ var PlayRoom = make(map[string]Room)
 
 var Game GameType
 
+// 清除无效用户
+func ClearUser(){
+	for _, ro := range PlayRoom{
+		for _, u := range ro.User{
+			if _,ok:= client_palyer[u.Ws];!ok{
+				log.Println("清除用户",u.OpenID)
+				Remove(u.OpenID)
+			}
+		}
+	}
+}
+
+
 // 开始游戏
 func GameStart(mes []byte, ws *websocket.Conn) string {
 	var room Room
+	ClearUser()
 	err := json.Unmarshal(mes, &Game)
 	if err != nil {
 		log.Println("数据问题:", err.Error())
@@ -69,7 +83,9 @@ func GameStart(mes []byte, ws *websocket.Conn) string {
 	} else {
 		room = NewRoom(Game.GameMode)
 	}
+	log.Println(len(client_palyer),"几个玩家",len(room.User))
 	message := Init(ws, room)
+	log.Println(len(client_palyer),"几个玩家","房间号",message)
 	return ToMes("roomID", message)
 }
 
@@ -156,9 +172,9 @@ func Join(room Room, player Player) Room {
 // 获取房间号
 func GetRoomID(room Room) string {
 	for l, ro := range PlayRoom {
-		log.Println(ro.Owner)
+		// log.Println(ro.Owner)
 		if ro.Owner == room.Owner {
-			log.Println("hhhhhhhhhhhhhhh-房间号")
+			// log.Println("hhhhhhhhhhhhhhh-房间号")
 			return l
 		}
 	}
@@ -194,7 +210,7 @@ func Init(ws *websocket.Conn, room Room) string {
 	}
 	str = str + ":房间总人数"
 	ServerSend(room, str)
-	log.Println(len(room.User),len(PlayRoom))
+	log.Println(len(room.User),len(PlayRoom),"房间问题")
 	return GetRoomID(room)
 }
 
@@ -307,6 +323,11 @@ func RoomSocket(conn []byte) {
 					HuKill(value.User, room, value.Message[6:])
 					sock = 0
 				}
+				if value.Message[:6] == "聊天" {
+					// 猎人杀人
+					GamingChat(value.User, room, value.Message[6:])
+					sock = 0
+				}
 				if value.Message[:6] == "投票" {
 					// 大家投票
 					WwKill(value.User, room, value.Message[6:])
@@ -318,6 +339,10 @@ func RoomSocket(conn []byte) {
 			}
 		}
 	}
+}
+// 聊天
+func GamingChat(user string, room Room, str string){
+	ServerSend(room, "聊天内容," + user+":"+str)
 }
 
 // 判断是否离线
@@ -524,21 +549,36 @@ func WiKill(user string, room Room, look string) {
 
 // 房间内设置掉线
 func Remove(str string) {
-	for l, item := range PlayRoom {
+	for _, item := range PlayRoom {
+		a := -1
 		for n, user := range item.User {
-			if user.OpenID == str {
+			if user.OpenID == str && item.Stop == 1 {
 				delete(client_palyer, user.Ws)
 				user.Status = "false"
 				item.User[n] = user
 			}
+			if user.OpenID == str && item.Stop == 0{
+				a = n
+			}
 		}
-		PlayRoom[l] = item
+		if a != -1{
+			item.User = append(item.User[:a], item.User[a+1:]...)
+		}
+		log.Println(len(item.User),"房间人数---------------------")
+		Update(item)
 	}
 }
 
 // 房间内设置掉线
 func Close(ws *websocket.Conn) {
-	Remove(client_palyer[ws])
+	for _,ro := range PlayRoom{
+		for _, u := range ro.User{
+			if u.Ws == ws{
+				Remove(u.OpenID)
+			}
+		}
+	}
+	// Remove(client_palyer[ws])
 }
 
 // 发送服务器公告信息
@@ -693,7 +733,7 @@ func Iden(room Room, user string, iden string) {
 					break
 				}
 			}
-			log.Println(room.Owner, "-------------", item.Identity, user)
+			// log.Println(room.Owner, "-------------", item.Identity, user)
 			SendMS(item.Ws, "您的身份是:"+item.Identity)
 		}
 		room.User[l] = item
@@ -886,6 +926,7 @@ func SendMS(ws *websocket.Conn, mes string) {
 	if err := websocket.Message.Send(ws, mes); err != nil {
 		log.Println("客户端丢失", err.Error())
 		Close(ws)
+		// log.Println("移除用户")
 	}
 }
 

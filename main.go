@@ -65,7 +65,7 @@ func Echo(ws *websocket.Conn) {
 func ParseConn(ws *websocket.Conn) {
 	var err error
 	client_map[ws] = ws.RemoteAddr().String()
-	log.Println(client_map)
+	// log.Println(client_map)
 	for {
 		var reply string
 		if err = websocket.Message.Receive(ws, &reply); err != nil {
@@ -73,13 +73,12 @@ func ParseConn(ws *websocket.Conn) {
 			CloseConn(ws)
 			break
 		}
-		log.Printf("用户发送了: %v\n", string(reply))
+		// log.Printf("用户发送了: %v\n", string(reply))
 
 		// 发送给解析函数
 		go Handler.ParseData(string(reply), ws)
 		// log.Println("等待三秒返回测试")
 		// time.Sleep(time.Duration(20) * time.Second)
-
 	}
 }
 

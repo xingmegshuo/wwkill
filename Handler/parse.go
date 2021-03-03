@@ -44,39 +44,39 @@ func ParseData(con string, ws *websocket.Conn) {
 		mes := Login(info, ws)
 		Send(ws, mes)
 	case "upgrade":
-		log.Println("账号升级")
+		// log.Println("账号升级")
 		mes := Upgrade(info)
 		Send(ws, mes)
 	case "back":
-		log.Println("获取背包")
+		// log.Println("获取背包")
 		mes := GetBack(info)
 		Send(ws, mes)
 	case "addback":
-		log.Println("购买商品，增加背包")
+		// log.Println("购买商品，增加背包")
 		mes := AddBack(info)
 		Send(ws, mes)
 	case "record":
-		log.Println("获取最近战绩")
+		// log.Println("获取最近战绩")
 		mes := GetRecord(info)
 		Send(ws, mes)
 	case "recordRate":
-		log.Println("获取全部战斗")
+		// log.Println("获取全部战斗")
 		mes := GetRecordAll(info)
 		Send(ws, mes)
 	case "buddy":
-		log.Println("获取好友列表")
+		// log.Println("获取好友列表")
 		mes := GetBuddy(info)
 		Send(ws, mes)
 	case "newbuddy":
-		log.Println("获取好友申请")
+		// log.Println("获取好友申请")
 		mes := GetNewBuddy(info)
 		Send(ws, mes)
 	case "agreebuddy":
-		log.Println("同意好友申请")
+		// log.Println("同意好友申请")
 		mes := AgreeBuddy(info)
 		Send(ws, mes)
 	case "rcombuddy":
-		log.Println("获取好友推荐")
+		// log.Println("获取好友推荐")
 		mes := RecomBuddy(info)
 		Send(ws, mes)
 	case "addbuddy":
@@ -114,7 +114,8 @@ func CloseUser(ws *websocket.Conn) {
 // 数据返回
 func Send(ws *websocket.Conn, mes string) {
 	if err := websocket.Message.Send(ws, mes); err != nil {
-		log.Println("客户端丢失", err.Error())
+		log.Println("客户端丢失parse获取", err.Error())
 		CloseUser(ws)
 	}
 }
+
